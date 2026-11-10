@@ -1,0 +1,931 @@
+{
+  "users": [
+    {
+      "id": "d0000000-0000-0000-0000-000000000001",
+      "email": "alex.morgan@example.com",
+      "full_name": "Alex Morgan",
+      "avatar_url": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150",
+      "role": "student",
+      "created_at": "2026-10-02T19:10:48.400Z"
+    },
+    {
+      "id": "d0000000-0000-0000-0000-000000000002",
+      "email": "priya.sharma@example.com",
+      "full_name": "Priya Sharma",
+      "avatar_url": "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150",
+      "role": "student",
+      "created_at": "2026-10-12T19:10:48.402Z"
+    }
+  ],
+  "user_profiles": [
+    {
+      "id": "p-1",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "target_role": "Full Stack Developer",
+      "experience_level": "Intermediate",
+      "target_companies": [
+        "Google",
+        "Stripe",
+        "Vercel",
+        "Microsoft"
+      ],
+      "bio": "Passionate software developer focusing on modern web apps, distributed systems, and scalable React & Node architectures.",
+      "skills": [
+        "React",
+        "TypeScript",
+        "Node.js",
+        "PostgreSQL",
+        "System Design",
+        "Docker"
+      ],
+      "preferred_language": "English",
+      "theme_preference": "light",
+      "total_interviews_completed": 6,
+      "average_score": 68.9
+    },
+    {
+      "id": "p-2",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "target_role": "AI/ML Engineer",
+      "experience_level": "Advanced",
+      "target_companies": [
+        "OpenAI",
+        "Anthropic",
+        "Google DeepMind"
+      ],
+      "bio": "Machine learning researcher and engineer experienced with Transformers, PyTorch, RAG systems, and model optimization.",
+      "skills": [
+        "Python",
+        "PyTorch",
+        "Transformers",
+        "FastAPI",
+        "MLOps",
+        "Vector Databases"
+      ],
+      "preferred_language": "English",
+      "theme_preference": "light",
+      "total_interviews_completed": 1,
+      "average_score": 70.6
+    }
+  ],
+  "interview_sessions": [
+    {
+      "id": "s-1794043400635",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "title": "AI/ML Engineer Technical Assessment",
+      "job_role": "AI/ML Engineer",
+      "experience_level": "Beginner",
+      "interview_type": "Technical",
+      "difficulty": "Easy",
+      "question_count": 3,
+      "duration_minutes": 15,
+      "time_taken_seconds": 136,
+      "status": "completed",
+      "resume_context": "",
+      "created_at": "2026-11-07T09:23:20.635Z",
+      "overall_score": 70.6,
+      "performance_status": "Satisfactory",
+      "completed_at": "2026-11-07T09:25:37.634Z"
+    },
+    {
+      "id": "s-1793963057524",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "title": "Frontend Developer Technical Assessment",
+      "job_role": "Frontend Developer",
+      "experience_level": "Intermediate",
+      "interview_type": "Technical",
+      "difficulty": "Medium",
+      "question_count": 5,
+      "duration_minutes": 20,
+      "time_taken_seconds": 15,
+      "status": "completed",
+      "resume_context": "",
+      "created_at": "2026-11-06T11:04:17.524Z",
+      "overall_score": 0,
+      "performance_status": "Needs Improvement",
+      "completed_at": "2026-11-06T11:04:33.546Z"
+    },
+    {
+      "id": "s-001",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "title": "Full Stack Architecture & React Deep Dive",
+      "job_role": "Full Stack Developer",
+      "experience_level": "Intermediate",
+      "interview_type": "Technical",
+      "difficulty": "Hard",
+      "question_count": 5,
+      "duration_minutes": 25,
+      "time_taken_seconds": 1140,
+      "status": "completed",
+      "overall_score": 84.5,
+      "performance_status": "Strong",
+      "created_at": "2026-10-29T19:10:48.402Z",
+      "completed_at": "2026-10-29T19:29:48.402Z"
+    },
+    {
+      "id": "s-002",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "title": "Frontend Engineering & Performance Optimization",
+      "job_role": "Frontend Developer",
+      "experience_level": "Intermediate",
+      "interview_type": "Technical",
+      "difficulty": "Medium",
+      "question_count": 4,
+      "duration_minutes": 20,
+      "time_taken_seconds": 890,
+      "status": "completed",
+      "overall_score": 88,
+      "performance_status": "Exceptional",
+      "created_at": "2026-10-26T19:10:48.402Z",
+      "completed_at": "2026-10-26T19:25:48.402Z"
+    },
+    {
+      "id": "s-003",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "title": "Engineering Leadership & Cross-Functional Teamwork",
+      "job_role": "Software Developer",
+      "experience_level": "Intermediate",
+      "interview_type": "HR",
+      "difficulty": "Medium",
+      "question_count": 4,
+      "duration_minutes": 15,
+      "time_taken_seconds": 720,
+      "status": "completed",
+      "overall_score": 79,
+      "performance_status": "Satisfactory",
+      "created_at": "2026-10-22T19:10:48.402Z",
+      "completed_at": "2026-10-22T19:22:48.402Z"
+    },
+    {
+      "id": "s-004",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "title": "Distributed Systems & Database Scaling",
+      "job_role": "Backend Developer",
+      "experience_level": "Intermediate",
+      "interview_type": "Technical",
+      "difficulty": "Hard",
+      "question_count": 5,
+      "duration_minutes": 25,
+      "time_taken_seconds": 1280,
+      "status": "completed",
+      "overall_score": 76.5,
+      "performance_status": "Satisfactory",
+      "created_at": "2026-10-18T19:10:48.402Z",
+      "completed_at": "2026-10-18T19:31:48.402Z"
+    },
+    {
+      "id": "s-005",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "title": "Modern JavaScript & Async Concurrency",
+      "job_role": "Frontend Developer",
+      "experience_level": "Intermediate",
+      "interview_type": "Technical",
+      "difficulty": "Medium",
+      "question_count": 4,
+      "duration_minutes": 20,
+      "time_taken_seconds": 950,
+      "status": "completed",
+      "overall_score": 85.5,
+      "performance_status": "Strong",
+      "created_at": "2026-10-14T19:10:48.402Z",
+      "completed_at": "2026-10-14T19:26:48.402Z"
+    }
+  ],
+  "interview_questions": [
+    {
+      "id": "q-s001-1",
+      "session_id": "s-001",
+      "question_number": 1,
+      "category": "React Internals",
+      "question_text": "How does React’s Virtual DOM and Reconciliation algorithm work, and how does the React 18 Fiber architecture enable concurrent rendering?",
+      "expected_concepts": [
+        "Virtual DOM",
+        "Reconciliation O(n)",
+        "Fiber Tree",
+        "Time Slicing",
+        "useTransition"
+      ],
+      "difficulty": "Hard"
+    },
+    {
+      "id": "q-s001-2",
+      "session_id": "s-001",
+      "question_number": 2,
+      "category": "Database Concurrency",
+      "question_text": "How do you handle race conditions in high-concurrency payment or inventory updates? Compare Optimistic vs. Pessimistic locking.",
+      "expected_concepts": [
+        "SELECT FOR UPDATE",
+        "Version column",
+        "Isolation Levels",
+        "Distributed Locks"
+      ],
+      "difficulty": "Hard"
+    },
+    {
+      "id": "q-s001-3",
+      "session_id": "s-001",
+      "question_number": 3,
+      "category": "System Design",
+      "question_text": "Design a real-time collaborative document editing tool. How do you handle concurrent conflicts between multiple users?",
+      "expected_concepts": [
+        "CRDTs",
+        "Operational Transformation",
+        "WebSockets",
+        "Eventual Consistency"
+      ],
+      "difficulty": "Hard"
+    },
+    {
+      "id": "q-s-1793963057524-1",
+      "session_id": "s-1793963057524",
+      "question_number": 1,
+      "category": "React Internals & Performance",
+      "question_text": "How does React’s Virtual DOM and Reconciliation algorithm work, and how does the React 18 Fiber architecture enable concurrent rendering?",
+      "expected_concepts": [
+        "Virtual DOM diffing heuristic (O(n) complexity)",
+        "Reconciliation and key prop importance",
+        "Fiber tree node structure with child, sibling, and return pointers",
+        "Time slicing and interruptible work units",
+        "useTransition and startTransition for prioritizing urgent updates"
+      ],
+      "difficulty": "Medium",
+      "is_followup": false,
+      "created_at": "2026-11-06T11:04:17.524Z"
+    },
+    {
+      "id": "q-s-1793963057524-2",
+      "session_id": "s-1793963057524",
+      "question_number": 2,
+      "category": "Web Performance & Core Web Vitals",
+      "question_text": "Explain Core Web Vitals (LCP, INP, CLS). What techniques would you use to diagnose and optimize a slow Largest Contentful Paint (LCP)?",
+      "expected_concepts": [
+        "Largest Contentful Paint (LCP) under 2.5s",
+        "Interaction to Next Paint (INP) replacing FID",
+        "Cumulative Layout Shift (CLS) under 0.1",
+        "Image optimization (WebP/AVIF, responsive srcset, fetchpriority=\"high\")",
+        "Critical CSS and SSR / streaming HTML",
+        "Eliminating render-blocking resources"
+      ],
+      "difficulty": "Medium",
+      "is_followup": false,
+      "created_at": "2026-11-06T11:04:17.524Z"
+    },
+    {
+      "id": "q-s-1793963057524-3",
+      "session_id": "s-1793963057524",
+      "question_number": 3,
+      "category": "Database Scaling & Concurrency",
+      "question_text": "How do you handle race conditions in high-concurrency payment or inventory updates? Compare Optimistic vs. Pessimistic locking.",
+      "expected_concepts": [
+        "Race conditions and lost updates",
+        "Pessimistic locking with SELECT ... FOR UPDATE",
+        "Optimistic locking using version column or timestamp",
+        "Database transaction isolation levels (Read Committed, Repeatable Read, Serializable)",
+        "Distributed locks using Redis Redlock or ZooKeeper for multi-node systems"
+      ],
+      "difficulty": "Hard",
+      "is_followup": false,
+      "created_at": "2026-11-06T11:04:17.524Z"
+    },
+    {
+      "id": "q-s-1793963057524-4",
+      "session_id": "s-1793963057524",
+      "question_number": 4,
+      "category": "API Architecture & Security",
+      "question_text": "What are the architectural differences between REST, GraphQL, and gRPC? When would you select each for a production microservices system?",
+      "expected_concepts": [
+        "REST: HTTP verbs, statelessness, URL resource hierarchy, over/under-fetching issues",
+        "GraphQL: Single endpoint, client-defined schema, avoids over-fetching, N+1 query challenge",
+        "gRPC: Protocol Buffers, HTTP/2 multiplexing, bidirectional streaming, strongly typed contracts",
+        "Internal service-to-service vs. external public API tradeoffs"
+      ],
+      "difficulty": "Medium",
+      "is_followup": false,
+      "created_at": "2026-11-06T11:04:17.524Z"
+    },
+    {
+      "id": "q-s-1793963057524-5",
+      "session_id": "s-1793963057524",
+      "question_number": 5,
+      "category": "System Design & State Synchronization",
+      "question_text": "Design a real-time collaborative document editing tool (like Google Docs or Notion). How do you handle concurrent conflicts between multiple users?",
+      "expected_concepts": [
+        "Operational Transformation (OT) vs. Conflict-Free Replicated Data Types (CRDTs)",
+        "WebSocket connection pooling & heartbeat mechanism",
+        "Local optimistic updates and eventual consistency",
+        "Document snapshotting and change delta log persistence",
+        "Presence awareness (cursor positions, active user indicators)"
+      ],
+      "difficulty": "Hard",
+      "is_followup": false,
+      "created_at": "2026-11-06T11:04:17.524Z"
+    },
+    {
+      "id": "q-s-1794043400635-1",
+      "session_id": "s-1794043400635",
+      "question_number": 1,
+      "category": "React Internals & Performance",
+      "question_text": "How does React’s Virtual DOM and Reconciliation algorithm work, and how does the React 18 Fiber architecture enable concurrent rendering?",
+      "expected_concepts": [
+        "Virtual DOM diffing heuristic (O(n) complexity)",
+        "Reconciliation and key prop importance",
+        "Fiber tree node structure with child, sibling, and return pointers",
+        "Time slicing and interruptible work units",
+        "useTransition and startTransition for prioritizing urgent updates"
+      ],
+      "difficulty": "Medium",
+      "is_followup": false,
+      "created_at": "2026-11-07T09:23:20.635Z"
+    },
+    {
+      "id": "q-s-1794043400635-2",
+      "session_id": "s-1794043400635",
+      "question_number": 2,
+      "category": "Web Performance & Core Web Vitals",
+      "question_text": "Explain Core Web Vitals (LCP, INP, CLS). What techniques would you use to diagnose and optimize a slow Largest Contentful Paint (LCP)?",
+      "expected_concepts": [
+        "Largest Contentful Paint (LCP) under 2.5s",
+        "Interaction to Next Paint (INP) replacing FID",
+        "Cumulative Layout Shift (CLS) under 0.1",
+        "Image optimization (WebP/AVIF, responsive srcset, fetchpriority=\"high\")",
+        "Critical CSS and SSR / streaming HTML",
+        "Eliminating render-blocking resources"
+      ],
+      "difficulty": "Medium",
+      "is_followup": false,
+      "created_at": "2026-11-07T09:23:20.635Z"
+    },
+    {
+      "id": "q-s-1794043400635-3",
+      "session_id": "s-1794043400635",
+      "question_number": 3,
+      "category": "Database Scaling & Concurrency",
+      "question_text": "How do you handle race conditions in high-concurrency payment or inventory updates? Compare Optimistic vs. Pessimistic locking.",
+      "expected_concepts": [
+        "Race conditions and lost updates",
+        "Pessimistic locking with SELECT ... FOR UPDATE",
+        "Optimistic locking using version column or timestamp",
+        "Database transaction isolation levels (Read Committed, Repeatable Read, Serializable)",
+        "Distributed locks using Redis Redlock or ZooKeeper for multi-node systems"
+      ],
+      "difficulty": "Hard",
+      "is_followup": false,
+      "created_at": "2026-11-07T09:23:20.635Z"
+    },
+    {
+      "id": "q-s-1794043400635-f1794043456803",
+      "session_id": "s-1794043400635",
+      "question_number": 4,
+      "category": "AI Follow-up Question",
+      "question_text": "Great start. How would this approach scale under 10x traffic, and what are the time or space complexities involved?",
+      "expected_concepts": [
+        "Scalability limits",
+        "Computational complexity",
+        "Resource bottlenecks"
+      ],
+      "difficulty": "Medium",
+      "is_followup": true,
+      "parent_question_id": "q-s-1794043400635-1",
+      "created_at": "2026-11-07T09:24:16.803Z"
+    }
+  ],
+  "interview_answers": [
+    {
+      "id": "ans-1",
+      "session_id": "s-001",
+      "question_id": "q-s001-1",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "answer_text": "React uses a Virtual DOM which is an in-memory javascript representation of real DOM nodes. When state updates occur, it computes a diff using a tree reconciliation algorithm. With React 18 Fiber, the diffing is broken into small chunks of work that can be paused, resumed, or aborted based on priority using useTransition, preventing the UI from freezing during heavy operations.",
+      "input_method": "text",
+      "time_spent_seconds": 180
+    },
+    {
+      "id": "ans-2",
+      "session_id": "s-001",
+      "question_id": "q-s001-2",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "answer_text": "To avoid race conditions, we can use pessimistic locking like SELECT FOR UPDATE in SQL which locks rows until the transaction commits. Alternatively, optimistic locking uses a version number column; if the version has incremented when we try to commit, the query fails and retries. For microservices, we use distributed locks like Redis Redlock.",
+      "input_method": "text",
+      "time_spent_seconds": 210
+    },
+    {
+      "id": "ans-3",
+      "session_id": "s-001",
+      "question_id": "q-s001-3",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "answer_text": "We connect users via WebSockets and use Conflict-Free Replicated Data Types (CRDTs) like Yjs or Operational Transformation (OT) to resolve conflicting text insertions and deletions deterministically across all peers. Deltas are stored in Postgres or Cassandra and periodic snapshots saved to S3.",
+      "input_method": "text",
+      "time_spent_seconds": 240
+    },
+    {
+      "id": "ans-1794043456783",
+      "session_id": "s-1794043400635",
+      "question_id": "q-s-1794043400635-1",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "answer_text": "okay so this will happen recording the interview answer and now the answer begins that don't is actually the object manipulation which is used in the HTML so that every element is at as an branch of a tree as an element",
+      "input_method": "text",
+      "time_spent_seconds": 56,
+      "created_at": "2026-11-07T09:24:16.783Z"
+    },
+    {
+      "id": "ans-1794043486193",
+      "session_id": "s-1794043400635",
+      "question_id": "q-s-1794043400635-2",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "answer_text": "I am not able to answer it right now",
+      "input_method": "voice",
+      "time_spent_seconds": 29,
+      "created_at": "2026-11-07T09:24:46.193Z"
+    },
+    {
+      "id": "ans-1794043513441",
+      "session_id": "s-1794043400635",
+      "question_id": "q-s-1794043400635-3",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "answer_text": "haven't prepare that but in Race condition and high currency payment I can handle with that taking time and taking my mission from the and then after that I will try to solve the problems",
+      "input_method": "voice",
+      "time_spent_seconds": 27,
+      "created_at": "2026-11-07T09:25:13.441Z"
+    },
+    {
+      "id": "ans-1794043537604",
+      "session_id": "s-1794043400635",
+      "question_id": "q-s-1794043400635-f1794043456803",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "answer_text": "I can control tanx traffic by using the approach that the customer who will come a fast will be served past",
+      "input_method": "text",
+      "time_spent_seconds": 24,
+      "created_at": "2026-11-07T09:25:37.604Z"
+    }
+  ],
+  "evaluation_results": [
+    {
+      "id": "eval-1",
+      "session_id": "s-001",
+      "question_id": "q-s001-1",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "technical_accuracy_score": 88,
+      "relevance_score": 92,
+      "communication_score": 85,
+      "completeness_score": 80,
+      "problem_solving_score": 82,
+      "weighted_total_score": 86.4,
+      "answer_quality_analysis": "Solid understanding of Virtual DOM and React 18 concurrent mechanics. Clearly explained Fiber scheduling and prioritization.",
+      "model_answer_suggestion": "Mention specific Fiber node pointers (child, sibling, return) and how time-slicing yields to browser frames (requestIdleCallback / MessageChannel scheduler).",
+      "missing_concepts": [
+        "Fiber node pointer structure",
+        "Browser microtask yielding scheduler"
+      ],
+      "strengths": [
+        "Accurate explanation of reconciliation",
+        "Clear understanding of useTransition"
+      ],
+      "weaknesses": [
+        "Did not mention exact pointer structure of Fiber nodes"
+      ],
+      "improvement_recommendations": [
+        "Review React Fiber scheduler source code details."
+      ],
+      "is_ai_generated_estimate": true
+    },
+    {
+      "id": "eval-2",
+      "session_id": "s-001",
+      "question_id": "q-s001-2",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "technical_accuracy_score": 85,
+      "relevance_score": 88,
+      "communication_score": 82,
+      "completeness_score": 80,
+      "problem_solving_score": 84,
+      "weighted_total_score": 84.3,
+      "answer_quality_analysis": "Clear differentiation between optimistic and pessimistic strategies. Appropriate mention of Redis Redlock for distributed scenarios.",
+      "model_answer_suggestion": "Discuss database transaction isolation levels (Repeatable Read vs Serializable) and fencing tokens to prevent split-brain in distributed locks.",
+      "missing_concepts": [
+        "Transaction isolation levels",
+        "Fencing tokens in Redis Redlock"
+      ],
+      "strengths": [
+        "Accurate SQL query representation",
+        "Good understanding of retry loops"
+      ],
+      "weaknesses": [
+        "Omitted isolation levels and deadlock handling"
+      ],
+      "improvement_recommendations": [
+        "Practice explaining isolation anomalies (dirty reads, phantom reads)."
+      ],
+      "is_ai_generated_estimate": true
+    },
+    {
+      "id": "eval-1794043456799-8uoz",
+      "session_id": "s-1794043400635",
+      "question_id": "q-s-1794043400635-1",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "technical_accuracy_score": 71,
+      "relevance_score": 70,
+      "communication_score": 88,
+      "completeness_score": 62,
+      "problem_solving_score": 72,
+      "weighted_total_score": 72.9,
+      "answer_quality_analysis": "Demonstrates solid comprehension of the subject. Effectively covered 1 of 5 key theoretical domains with structured reasoning.",
+      "model_answer_suggestion": "A comprehensive answer should state: 1) The exact architectural definition; 2) The core mechanism under the hood; 3) Tradeoffs against alternatives; and 4) Production monitoring or failure handling.",
+      "missing_concepts": [
+        "virtual dom diffing heuristic (o(n) complexity)",
+        "reconciliation and key prop importance",
+        "time slicing and interruptible work units",
+        "usetransition and starttransition for prioritizing urgent updates"
+      ],
+      "strengths": [
+        "Clearly recognized key concept: fiber tree node structure with child, sibling, and return pointers"
+      ],
+      "weaknesses": [
+        "Could explicitly discuss: virtual dom diffing heuristic (o(n) complexity), reconciliation and key prop importance",
+        "Did not explicitly state operational or computational tradeoffs."
+      ],
+      "improvement_recommendations": [
+        "Always articulate Big-O complexity or distributed failure recovery mechanisms early.",
+        "Follow up assertions with concrete metrics (e.g., latency reduction, memory footprint, cache hit rates)."
+      ],
+      "is_ai_generated_estimate": true
+    },
+    {
+      "id": "eval-1794043486202-p9du",
+      "session_id": "s-1794043400635",
+      "question_id": "q-s-1794043400635-2",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "technical_accuracy_score": 65,
+      "relevance_score": 70,
+      "communication_score": 70,
+      "completeness_score": 55,
+      "problem_solving_score": 72,
+      "weighted_total_score": 66.5,
+      "answer_quality_analysis": "Demonstrates solid comprehension of the subject. Effectively covered 0 of 6 key theoretical domains with structured reasoning.",
+      "model_answer_suggestion": "A comprehensive answer should state: 1) The exact architectural definition; 2) The core mechanism under the hood; 3) Tradeoffs against alternatives; and 4) Production monitoring or failure handling.",
+      "missing_concepts": [
+        "largest contentful paint (lcp) under 2.5s",
+        "interaction to next paint (inp) replacing fid",
+        "cumulative layout shift (cls) under 0.1",
+        "image optimization (webp/avif, responsive srcset, fetchpriority=\"high\")",
+        "critical css and ssr / streaming html",
+        "eliminating render-blocking resources"
+      ],
+      "strengths": [
+        "Clear intent",
+        "Relevant technical focus"
+      ],
+      "weaknesses": [
+        "Could explicitly discuss: largest contentful paint (lcp) under 2.5s, interaction to next paint (inp) replacing fid",
+        "Response could benefit from deeper architectural justification and concrete examples.",
+        "Did not explicitly state operational or computational tradeoffs."
+      ],
+      "improvement_recommendations": [
+        "Always articulate Big-O complexity or distributed failure recovery mechanisms early.",
+        "Follow up assertions with concrete metrics (e.g., latency reduction, memory footprint, cache hit rates)."
+      ],
+      "is_ai_generated_estimate": true
+    },
+    {
+      "id": "eval-1794043513451-bdhl",
+      "session_id": "s-1794043400635",
+      "question_id": "q-s-1794043400635-3",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "technical_accuracy_score": 77,
+      "relevance_score": 82,
+      "communication_score": 70,
+      "completeness_score": 69,
+      "problem_solving_score": 72,
+      "weighted_total_score": 75.1,
+      "answer_quality_analysis": "Demonstrates solid comprehension of the subject. Effectively covered 2 of 5 key theoretical domains with structured reasoning.",
+      "model_answer_suggestion": "A comprehensive answer should state: 1) The exact architectural definition; 2) The core mechanism under the hood; 3) Tradeoffs against alternatives; and 4) Production monitoring or failure handling.",
+      "missing_concepts": [
+        "optimistic locking using version column or timestamp",
+        "database transaction isolation levels (read committed, repeatable read, serializable)",
+        "distributed locks using redis redlock or zookeeper for multi-node systems"
+      ],
+      "strengths": [
+        "Clearly recognized key concept: race conditions and lost updates",
+        "Clearly recognized key concept: pessimistic locking with select ... for update"
+      ],
+      "weaknesses": [
+        "Could explicitly discuss: optimistic locking using version column or timestamp, database transaction isolation levels (read committed, repeatable read, serializable)",
+        "Response could benefit from deeper architectural justification and concrete examples.",
+        "Did not explicitly state operational or computational tradeoffs."
+      ],
+      "improvement_recommendations": [
+        "Always articulate Big-O complexity or distributed failure recovery mechanisms early.",
+        "Follow up assertions with concrete metrics (e.g., latency reduction, memory footprint, cache hit rates)."
+      ],
+      "is_ai_generated_estimate": true
+    },
+    {
+      "id": "eval-1794043537606-vezc",
+      "session_id": "s-1794043400635",
+      "question_id": "q-s-1794043400635-f1794043456803",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "technical_accuracy_score": 65,
+      "relevance_score": 76,
+      "communication_score": 70,
+      "completeness_score": 55,
+      "problem_solving_score": 72,
+      "weighted_total_score": 68,
+      "answer_quality_analysis": "Demonstrates solid comprehension of the subject. Effectively covered 0 of 3 key theoretical domains with structured reasoning.",
+      "model_answer_suggestion": "A comprehensive answer should state: 1) The exact architectural definition; 2) The core mechanism under the hood; 3) Tradeoffs against alternatives; and 4) Production monitoring or failure handling.",
+      "missing_concepts": [
+        "scalability limits",
+        "computational complexity",
+        "resource bottlenecks"
+      ],
+      "strengths": [
+        "Clear intent",
+        "Relevant technical focus"
+      ],
+      "weaknesses": [
+        "Could explicitly discuss: scalability limits, computational complexity",
+        "Response could benefit from deeper architectural justification and concrete examples.",
+        "Did not explicitly state operational or computational tradeoffs."
+      ],
+      "improvement_recommendations": [
+        "Always articulate Big-O complexity or distributed failure recovery mechanisms early.",
+        "Follow up assertions with concrete metrics (e.g., latency reduction, memory footprint, cache hit rates)."
+      ],
+      "is_ai_generated_estimate": true
+    }
+  ],
+  "skill_analytics": [
+    {
+      "id": "sk-1",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "skill_category": "Technical Accuracy",
+      "proficiency_score": 70.8,
+      "interviews_tested": 6,
+      "strongest_point": "Strong grasp of React reconciliation and state management",
+      "weakest_point": "Edge cases in distributed transaction rollbacks",
+      "last_updated": "2026-11-06T11:04:33.553Z"
+    },
+    {
+      "id": "sk-2",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "skill_category": "Relevance",
+      "proficiency_score": 73.3,
+      "interviews_tested": 6,
+      "strongest_point": "Consistently addresses core requirements directly",
+      "weakest_point": "Could tighten introductions before elaborating",
+      "last_updated": "2026-11-06T11:04:33.553Z"
+    },
+    {
+      "id": "sk-3",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "skill_category": "Communication",
+      "proficiency_score": 67.5,
+      "interviews_tested": 6,
+      "strongest_point": "Clear articulation of architectural tradeoffs",
+      "weakest_point": "Pacing can accelerate when explaining complex algorithms",
+      "last_updated": "2026-11-06T11:04:33.553Z"
+    },
+    {
+      "id": "sk-4",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "skill_category": "Completeness",
+      "proficiency_score": 65,
+      "interviews_tested": 6,
+      "strongest_point": "Covers happy paths and baseline configurations well",
+      "weakest_point": "Occasionally skips failure modes and latency mitigation",
+      "last_updated": "2026-11-06T11:04:33.553Z"
+    },
+    {
+      "id": "sk-5",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "skill_category": "Problem-Solving Approach",
+      "proficiency_score": 69.6,
+      "interviews_tested": 6,
+      "strongest_point": "Step-by-step breakdown using first principles",
+      "weakest_point": "Can state computational complexity earlier in answers",
+      "last_updated": "2026-11-06T11:04:33.553Z"
+    },
+    {
+      "id": "sk-1794043537637-lnrn",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "skill_category": "Technical Accuracy",
+      "proficiency_score": 69.5,
+      "interviews_tested": 1,
+      "strongest_point": "Evaluated in recent session",
+      "weakest_point": "Keep practicing",
+      "last_updated": "2026-11-07T09:25:37.638Z"
+    },
+    {
+      "id": "sk-1794043537638-yfe1",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "skill_category": "Relevance",
+      "proficiency_score": 74.5,
+      "interviews_tested": 1,
+      "strongest_point": "Evaluated in recent session",
+      "weakest_point": "Keep practicing",
+      "last_updated": "2026-11-07T09:25:37.638Z"
+    },
+    {
+      "id": "sk-1794043537638-3w3t",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "skill_category": "Communication",
+      "proficiency_score": 74.5,
+      "interviews_tested": 1,
+      "strongest_point": "Evaluated in recent session",
+      "weakest_point": "Keep practicing",
+      "last_updated": "2026-11-07T09:25:37.638Z"
+    },
+    {
+      "id": "sk-1794043537638-o89l",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "skill_category": "Completeness",
+      "proficiency_score": 60.3,
+      "interviews_tested": 1,
+      "strongest_point": "Evaluated in recent session",
+      "weakest_point": "Keep practicing",
+      "last_updated": "2026-11-07T09:25:37.638Z"
+    },
+    {
+      "id": "sk-1794043537638-6nr1",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "skill_category": "Problem-Solving Approach",
+      "proficiency_score": 72,
+      "interviews_tested": 1,
+      "strongest_point": "Evaluated in recent session",
+      "weakest_point": "Keep practicing",
+      "last_updated": "2026-11-07T09:25:37.638Z"
+    }
+  ],
+  "learning_recommendations": [
+    {
+      "id": "rec-1794043537646-ah4o",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "session_id": "s-1794043400635",
+      "topic": "Algorithmic Tradeoffs & Computational Complexity",
+      "category": "Coding Practice",
+      "difficulty": "Hard",
+      "description": "Solve 3 medium-to-hard LeetCode problems focusing on space-time optimization and explaining your thought process out loud.",
+      "resource_url": "https://leetcode.com/problemset/all/",
+      "is_completed": false,
+      "created_at": "2026-11-07T09:25:37.646Z"
+    },
+    {
+      "id": "rec-1794043537646-1wdn",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "session_id": "s-1794043400635",
+      "topic": "STAR Method & Executive Communication",
+      "category": "Communication Exercise",
+      "difficulty": "Medium",
+      "description": "Practice formulating answers starting with a 1-sentence high-level summary, followed by 3 structured points and quantifiable metrics.",
+      "resource_url": "https://hbr.org/2021/02/how-to-answer-behavioral-interview-questions",
+      "is_completed": false,
+      "created_at": "2026-11-07T09:25:37.646Z"
+    },
+    {
+      "id": "rec-1794043537646-5tx9",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "session_id": "s-1794043400635",
+      "topic": "AI/ML Engineer Core Architecture & Edge Cases",
+      "category": "Technical Revision",
+      "difficulty": "Medium",
+      "description": "Review fundamental algorithms and internal runtime mechanics observed in AI/ML Engineer Technical Assessment. Focus on failure modes and boundary conditions.",
+      "resource_url": "https://github.com/donnemartin/system-design-primer",
+      "is_completed": false,
+      "created_at": "2026-11-07T09:25:37.646Z"
+    },
+    {
+      "id": "rec-1793963073559-2dkk",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "session_id": "s-1793963057524",
+      "topic": "Algorithmic Tradeoffs & Computational Complexity",
+      "category": "Coding Practice",
+      "difficulty": "Hard",
+      "description": "Solve 3 medium-to-hard LeetCode problems focusing on space-time optimization and explaining your thought process out loud.",
+      "resource_url": "https://leetcode.com/problemset/all/",
+      "is_completed": false,
+      "created_at": "2026-11-06T11:04:33.559Z"
+    },
+    {
+      "id": "rec-1793963073559-kmbn",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "session_id": "s-1793963057524",
+      "topic": "STAR Method & Executive Communication",
+      "category": "Communication Exercise",
+      "difficulty": "Medium",
+      "description": "Practice formulating answers starting with a 1-sentence high-level summary, followed by 3 structured points and quantifiable metrics.",
+      "resource_url": "https://hbr.org/2021/02/how-to-answer-behavioral-interview-questions",
+      "is_completed": false,
+      "created_at": "2026-11-06T11:04:33.559Z"
+    },
+    {
+      "id": "rec-1793963073559-3a03",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "session_id": "s-1793963057524",
+      "topic": "Frontend Developer Core Architecture & Edge Cases",
+      "category": "Technical Revision",
+      "difficulty": "Medium",
+      "description": "Review fundamental algorithms and internal runtime mechanics observed in Frontend Developer Technical Assessment. Focus on failure modes and boundary conditions.",
+      "resource_url": "https://github.com/donnemartin/system-design-primer",
+      "is_completed": false,
+      "created_at": "2026-11-06T11:04:33.559Z"
+    },
+    {
+      "id": "rec-1",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "topic": "Database Sharding & Consistent Hashing",
+      "category": "System Design",
+      "difficulty": "Hard",
+      "description": "Deep dive into horizontal partitioning strategies, hot key mitigations, and virtual node rings in distributed datastores.",
+      "resource_url": "https://github.com/donnemartin/system-design-primer#consistent-hashing",
+      "is_completed": false,
+      "created_at": "2026-10-30T19:10:48.402Z"
+    },
+    {
+      "id": "rec-2",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "topic": "STAR Method Behavioral Framing",
+      "category": "Communication Exercise",
+      "difficulty": "Medium",
+      "description": "Practice formulating project conflict and deadline stories using Situation, Task, Action, and quantifiable Results.",
+      "resource_url": "https://hbr.org/2021/02/how-to-answer-behavioral-interview-questions",
+      "is_completed": true,
+      "created_at": "2026-10-27T19:10:48.402Z"
+    },
+    {
+      "id": "rec-3",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "topic": "React Concurrent Rendering & useTransition",
+      "category": "Technical Revision",
+      "difficulty": "Medium",
+      "description": "Explore how React 18 interrupts low-priority re-renders to maintain input responsiveness and avoid UI freezes.",
+      "resource_url": "https://react.dev/reference/react/useTransition",
+      "is_completed": false,
+      "created_at": "2026-10-25T19:10:48.402Z"
+    },
+    {
+      "id": "rec-4",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "topic": "LRU Cache Implementation & Complexity Analysis",
+      "category": "Coding Practice",
+      "difficulty": "Medium",
+      "description": "Implement an O(1) Get and Put cache using doubly-linked list with hash map lookup.",
+      "resource_url": "https://leetcode.com/problems/lru-cache/",
+      "is_completed": false,
+      "created_at": "2026-10-22T19:10:48.402Z"
+    }
+  ],
+  "user_badges": [
+    {
+      "id": "b-1",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "badge_key": "first_interview",
+      "title": "First Step",
+      "description": "Completed your very first AI mock interview session!",
+      "icon": "Award",
+      "unlocked_at": "2026-10-14T19:10:48.402Z"
+    },
+    {
+      "id": "b-2",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "badge_key": "high_scorer",
+      "title": "Top Performer",
+      "description": "Scored above 85% on a challenging Technical Interview.",
+      "icon": "Flame",
+      "unlocked_at": "2026-10-26T19:10:48.402Z"
+    },
+    {
+      "id": "b-3",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "badge_key": "streak_3",
+      "title": "Consistency Master",
+      "description": "Practiced interviews 3 days in a row.",
+      "icon": "Zap",
+      "unlocked_at": "2026-10-29T19:10:48.402Z"
+    },
+    {
+      "id": "b-4",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "badge_key": "tech_guru",
+      "title": "Technical Guru",
+      "description": "Averaged 85%+ across Technical Accuracy evaluations.",
+      "icon": "Cpu",
+      "unlocked_at": "2026-10-29T19:10:48.402Z"
+    },
+    {
+      "id": "b-1793963073546-czj",
+      "user_id": "d0000000-0000-0000-0000-000000000001",
+      "badge_key": "veteran",
+      "title": "Interview Veteran",
+      "description": "Completed 5+ full-length AI mock interviews.",
+      "icon": "ShieldCheck",
+      "unlocked_at": "2026-11-06T11:04:33.546Z"
+    },
+    {
+      "id": "b-1794043537634-14o",
+      "user_id": "d0000000-0000-0000-0000-000000000002",
+      "badge_key": "first_interview",
+      "title": "First Step",
+      "description": "Completed your very first AI mock interview session!",
+      "icon": "Award",
+      "unlocked_at": "2026-11-07T09:25:37.634Z"
+    }
+  ]
+}
