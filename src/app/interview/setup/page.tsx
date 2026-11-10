@@ -387,18 +387,18 @@ export default function InterviewSetupPage() {
         </div>
 
         {/* Submit & Start Button */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-xl bg-white dark:bg-[#111215] border border-zinc-200 dark:border-[#1F2228]">
-          <div className="text-xs text-zinc-600 dark:text-zinc-400 space-y-0.5">
-            <p className="font-medium text-zinc-900 dark:text-zinc-100">
+        <div className="paper p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-xs text-[var(--text-soft)] space-y-0.5">
+            <p className="font-editorial text-sm font-semibold text-[var(--text)]">
               {jobRole} • {difficulty} • {questionCount} Questions
             </p>
-            <p className="text-[11px] text-zinc-500">Voice answer transcription & timer active in the session room.</p>
+            <p className="text-[11px] text-[var(--text-muted)]">Voice answer transcription & timer active in the session room.</p>
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium text-xs hover:opacity-90 transition-opacity disabled:opacity-60"
+            className="btn-enfold py-2.5 px-6 text-xs disabled:opacity-60"
           >
             {isSubmitting ? (
               <>

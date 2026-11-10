@@ -44,10 +44,21 @@ module.exports = {
           500: '#8B5CF6',
           600: '#7C3AED',
           700: '#6D28D9',
-        }
+        },
+        enfold: {
+          bg: 'var(--bg)',
+          paper: 'var(--paper)',
+          text: 'var(--text)',
+          muted: 'var(--text-muted)',
+          soft: 'var(--text-soft)',
+          rule: 'var(--rule)',
+          accent: 'var(--accent)',
+        },
       },
       fontFamily: {
-        sans: ['Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        editorial: ['Literata', 'Georgia', 'Times New Roman', 'serif'],
+        ui: ['Figtree', 'system-ui', 'sans-serif'],
+        sans: ['Figtree', 'Inter', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
       },
       animation: {
         'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
