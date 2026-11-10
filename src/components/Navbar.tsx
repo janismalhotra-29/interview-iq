@@ -6,7 +6,6 @@ import { usePathname } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import ThemeToggle from './ThemeToggle';
 import {
-  Sparkles,
   LayoutDashboard,
   PlayCircle,
   BarChart3,
@@ -18,7 +17,7 @@ import {
   Menu,
   X,
   ChevronDown,
-  BrainCircuit,
+  Terminal,
 } from 'lucide-react';
 
 export default function Navbar() {
@@ -28,12 +27,11 @@ export default function Navbar() {
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const [demoDropdownOpen, setDemoDropdownOpen] = useState(false);
 
-  // If in the live interview room, simplify navbar so the user stays 100% focused!
   const isInterviewRoom = pathname?.startsWith('/interview/') && pathname !== '/interview/setup';
 
   const navLinks = [
     { label: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-    { label: 'Mock Interview', href: '/interview/setup', icon: PlayCircle },
+    { label: 'Mock Session', href: '/interview/setup', icon: PlayCircle },
     { label: 'Analytics', href: '/analytics', icon: BarChart3 },
     { label: 'History', href: '/history', icon: History },
     { label: 'Roadmap', href: '/roadmap', icon: Map },
@@ -41,93 +39,86 @@ export default function Navbar() {
   ];
 
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-md bg-white/90 dark:bg-navy-900/90 border-b border-navy-100 dark:border-navy-800 transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+    <header className="sticky top-0 z-50 backdrop-blur-md bg-white/95 dark:bg-[#090A0C]/90 border-b border-zinc-200 dark:border-[#1F2228] transition-colors">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <div className="flex items-center justify-between h-14">
           {/* Logo & Brand */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2.5 group">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-brand-600 via-royal-500 to-violet-500 flex items-center justify-center text-white shadow-md shadow-brand-500/20 group-hover:scale-105 transition-transform">
-                <BrainCircuit className="w-5 h-5" />
+              <div className="w-7 h-7 rounded-md bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 flex items-center justify-center font-bold text-xs shadow-xs border border-zinc-800">
+                <Terminal className="w-3.5 h-3.5" />
               </div>
-              <div className="flex flex-col">
-                <div className="flex items-center gap-1.5">
-                  <span className="font-extrabold text-xl tracking-tight text-navy-900 dark:text-white">
-                    Interview<span className="text-brand-600 dark:text-brand-400">IQ</span>
-                  </span>
-                  <span className="text-[10px] uppercase font-bold tracking-wider px-1.5 py-0.5 rounded-full bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-300 border border-brand-200/50 dark:border-brand-800">
-                    AI 2.0
-                  </span>
-                </div>
-                <span className="text-[10px] text-navy-500 dark:text-navy-400 font-medium hidden sm:inline">
-                  Intelligent Interview System
+              <div className="flex items-center gap-2">
+                <span className="font-semibold text-sm tracking-tight text-zinc-900 dark:text-zinc-100">
+                  InterviewIQ
+                </span>
+                <span className="text-[10px] font-mono text-zinc-500 border border-zinc-200 dark:border-zinc-800 px-1.5 py-0.2 rounded">
+                  v1.2
                 </span>
               </div>
             </Link>
+
+            {/* Desktop Navigation Links */}
+            {!isInterviewRoom && (
+              <nav className="hidden md:flex items-center gap-1">
+                {navLinks.map((link) => {
+                  const Icon = link.icon;
+                  const isActive = pathname === link.href;
+                  return (
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      prefetch={true}
+                      className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors ${
+                        isActive
+                          ? 'bg-zinc-100 dark:bg-[#1A1D24] text-zinc-900 dark:text-zinc-100 font-semibold border border-zinc-200 dark:border-[#262B34]'
+                          : 'text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200 hover:bg-zinc-50 dark:hover:bg-[#13151A]'
+                      }`}
+                    >
+                      <Icon className="w-3.5 h-3.5 opacity-70" />
+                      <span>{link.label}</span>
+                    </Link>
+                  );
+                })}
+              </nav>
+            )}
           </div>
 
-          {/* Desktop Navigation Links */}
-          {!isInterviewRoom && (
-            <nav className="hidden md:flex items-center gap-1">
-              {navLinks.map((link) => {
-                const Icon = link.icon;
-                const isActive = pathname === link.href;
-                return (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    prefetch={true}
-                    className={`flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium transition-all ${
-                      isActive
-                        ? 'bg-brand-50 dark:bg-brand-950/80 text-brand-600 dark:text-brand-300 font-semibold shadow-xs'
-                        : 'text-navy-600 dark:text-navy-300 hover:text-navy-900 dark:hover:text-white hover:bg-navy-50 dark:hover:bg-navy-800/60'
-                    }`}
-                  >
-                    <Icon className={`w-4 h-4 ${isActive ? 'text-brand-600 dark:text-brand-400' : 'text-navy-400'}`} />
-                    <span>{link.label}</span>
-                  </Link>
-                );
-              })}
-            </nav>
-          )}
-
           {/* Right Action Items */}
-          <div className="flex items-center gap-2 sm:gap-3">
-            {/* Demo Account Switcher Pill */}
+          <div className="flex items-center gap-2">
+            {/* Demo Account Switcher */}
             <div className="relative">
               <button
                 onClick={() => setDemoDropdownOpen(!demoDropdownOpen)}
-                className="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800/50 hover:bg-amber-100 transition-colors"
-                title="Switch demo persona"
+                className="hidden lg:flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium text-zinc-600 dark:text-zinc-400 bg-zinc-50 dark:bg-[#111215] border border-zinc-200 dark:border-[#1F2228] hover:text-zinc-900 dark:hover:text-zinc-200 transition-colors"
+                title="Switch demo account"
               >
-                <Sparkles className="w-3.5 h-3.5 text-amber-500" />
-                <span>Demo: {user?.full_name?.split(' ')[0] || 'Guest'}</span>
-                <ChevronDown className="w-3 h-3 text-amber-600" />
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500"></span>
+                <span>Demo: {user?.full_name?.split(' ')[0] || 'User'}</span>
+                <ChevronDown className="w-3 h-3 opacity-60" />
               </button>
 
               {demoDropdownOpen && (
                 <div
                   onMouseLeave={() => setDemoDropdownOpen(false)}
-                  className="absolute right-0 mt-2 w-64 bg-white dark:bg-navy-800 rounded-2xl shadow-xl border border-navy-100 dark:border-navy-700 p-2 z-50 text-xs animate-in fade-in slide-in-from-top-2"
+                  className="absolute right-0 mt-1.5 w-56 bg-white dark:bg-[#111215] rounded-lg shadow-lg border border-zinc-200 dark:border-[#1F2228] p-1.5 z-50 text-xs"
                 >
-                  <p className="px-3 py-1.5 font-semibold text-navy-400 uppercase tracking-wider text-[10px]">
-                    Switch Demo Persona
+                  <p className="px-2 py-1 font-mono text-[10px] text-zinc-400 uppercase tracking-wider">
+                    Demo accounts
                   </p>
                   <button
                     onClick={() => {
                       switchDemoUser('alex');
                       setDemoDropdownOpen(false);
                     }}
-                    className={`w-full text-left p-2.5 rounded-xl flex items-center gap-2.5 hover:bg-navy-50 dark:hover:bg-navy-750 transition-colors ${
-                      user?.email?.includes('alex') ? 'bg-brand-50 dark:bg-brand-950/60 text-brand-600 font-semibold' : ''
+                    className={`w-full text-left px-2.5 py-1.5 rounded-md flex items-center gap-2 hover:bg-zinc-50 dark:hover:bg-[#1A1D24] transition-colors ${
+                      user?.email?.includes('alex') ? 'bg-zinc-100 dark:bg-[#1A1D24] text-zinc-900 dark:text-white font-medium' : 'text-zinc-600 dark:text-zinc-400'
                     }`}
                   >
-                    <div className="w-7 h-7 rounded-full bg-brand-500 text-white flex items-center justify-center font-bold text-xs">
-                      AM
-                    </div>
+                    <span className="w-5 h-5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 flex items-center justify-center font-mono text-[10px]">AM</span>
                     <div>
-                      <div className="font-semibold text-navy-900 dark:text-white">Alex Morgan</div>
-                      <div className="text-[11px] text-navy-500 dark:text-navy-400">Full Stack Developer</div>
+                      <div className="font-medium">Alex Morgan</div>
+                      <div className="text-[10px] text-zinc-400">Full Stack</div>
                     </div>
                   </button>
 
@@ -136,16 +127,14 @@ export default function Navbar() {
                       switchDemoUser('priya');
                       setDemoDropdownOpen(false);
                     }}
-                    className={`w-full text-left p-2.5 rounded-xl flex items-center gap-2.5 hover:bg-navy-50 dark:hover:bg-navy-750 transition-colors ${
-                      user?.email?.includes('priya') ? 'bg-brand-50 dark:bg-brand-950/60 text-brand-600 font-semibold' : ''
+                    className={`w-full text-left px-2.5 py-1.5 rounded-md flex items-center gap-2 hover:bg-zinc-50 dark:hover:bg-[#1A1D24] transition-colors ${
+                      user?.email?.includes('priya') ? 'bg-zinc-100 dark:bg-[#1A1D24] text-zinc-900 dark:text-white font-medium' : 'text-zinc-600 dark:text-zinc-400'
                     }`}
                   >
-                    <div className="w-7 h-7 rounded-full bg-violet-500 text-white flex items-center justify-center font-bold text-xs">
-                      PS
-                    </div>
+                    <span className="w-5 h-5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 flex items-center justify-center font-mono text-[10px]">PS</span>
                     <div>
-                      <div className="font-semibold text-navy-900 dark:text-white">Priya Sharma</div>
-                      <div className="text-[11px] text-navy-500 dark:text-navy-400">AI / ML Engineer</div>
+                      <div className="font-medium">Priya Sharma</div>
+                      <div className="text-[10px] text-zinc-400">AI / ML</div>
                     </div>
                   </button>
                 </div>
@@ -155,94 +144,83 @@ export default function Navbar() {
             {/* Theme Toggle */}
             <ThemeToggle />
 
-            {/* User Profile Dropdown */}
+            {/* User Profile */}
             {user ? (
               <div className="relative">
                 <button
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-                  className="flex items-center gap-2 p-1.5 rounded-full hover:bg-navy-100 dark:hover:bg-navy-800 transition-colors border border-navy-200/80 dark:border-navy-700"
+                  className="flex items-center gap-2 p-1 rounded-md hover:bg-zinc-100 dark:hover:bg-[#1A1D24] transition-colors border border-transparent hover:border-zinc-200 dark:hover:border-[#1F2228]"
                 >
-                  {user.avatar_url ? (
-                    <img
-                      src={user.avatar_url}
-                      alt={user.full_name}
-                      className="w-8 h-8 rounded-full object-cover ring-2 ring-brand-500/20"
-                    />
-                  ) : (
-                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-brand-600 to-violet-600 text-white flex items-center justify-center font-bold text-xs ring-2 ring-brand-500/20 shadow-xs">
-                      {user.full_name
-                        .split(' ')
-                        .map((n) => n[0])
-                        .join('')
-                        .slice(0, 2)}
-                    </div>
-                  )}
-                  <span className="hidden sm:inline-block font-semibold text-sm text-navy-800 dark:text-navy-100 pr-1">
+                  <div className="w-6 h-6 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 flex items-center justify-center font-mono text-[10px] font-medium border border-zinc-300 dark:border-zinc-700">
+                    {user.full_name
+                      .split(' ')
+                      .map((n) => n[0])
+                      .join('')
+                      .slice(0, 2)}
+                  </div>
+                  <span className="hidden sm:inline-block font-medium text-xs text-zinc-700 dark:text-zinc-300">
                     {user.full_name.split(' ')[0]}
                   </span>
-                  <ChevronDown className="w-3.5 h-3.5 text-navy-400" />
+                  <ChevronDown className="w-3 h-3 text-zinc-400" />
                 </button>
 
                 {profileDropdownOpen && (
                   <div
                     onMouseLeave={() => setProfileDropdownOpen(false)}
-                    className="absolute right-0 mt-2 w-56 bg-white dark:bg-navy-800 rounded-2xl shadow-xl border border-navy-100 dark:border-navy-700 p-2 z-50 text-sm animate-in fade-in slide-in-from-top-2"
+                    className="absolute right-0 mt-1.5 w-52 bg-white dark:bg-[#111215] rounded-lg shadow-lg border border-zinc-200 dark:border-[#1F2228] p-1.5 z-50 text-xs"
                   >
-                    <div className="px-3 py-2 border-b border-navy-100 dark:border-navy-700">
-                      <p className="font-semibold text-navy-900 dark:text-white truncate">{user.full_name}</p>
-                      <p className="text-xs text-navy-500 dark:text-navy-400 truncate">{user.email}</p>
-                      <p className="text-[11px] text-brand-600 dark:text-brand-400 mt-0.5 font-medium">
-                        {profile?.target_role || 'Candidate'}
-                      </p>
+                    <div className="px-2.5 py-2 border-b border-zinc-100 dark:border-[#1F2228]">
+                      <p className="font-medium text-zinc-900 dark:text-zinc-100 truncate">{user.full_name}</p>
+                      <p className="text-[11px] text-zinc-400 truncate">{user.email}</p>
                     </div>
 
                     <div className="py-1">
                       <Link
                         href="/profile"
                         onClick={() => setProfileDropdownOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 rounded-xl text-navy-700 dark:text-navy-200 hover:bg-navy-50 dark:hover:bg-navy-700 transition-colors"
+                        className="flex items-center gap-2 px-2.5 py-1.5 rounded text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-[#1A1D24] transition-colors"
                       >
-                        <User className="w-4 h-4 text-navy-400" />
-                        <span>Profile & Settings</span>
+                        <User className="w-3.5 h-3.5 text-zinc-400" />
+                        <span>Settings</span>
                       </Link>
                       <Link
                         href="/dashboard"
                         onClick={() => setProfileDropdownOpen(false)}
-                        className="flex items-center gap-2 px-3 py-2 rounded-xl text-navy-700 dark:text-navy-200 hover:bg-navy-50 dark:hover:bg-navy-700 transition-colors"
+                        className="flex items-center gap-2 px-2.5 py-1.5 rounded text-zinc-700 dark:text-zinc-300 hover:bg-zinc-50 dark:hover:bg-[#1A1D24] transition-colors"
                       >
-                        <LayoutDashboard className="w-4 h-4 text-navy-400" />
-                        <span>Student Dashboard</span>
+                        <LayoutDashboard className="w-3.5 h-3.5 text-zinc-400" />
+                        <span>Dashboard</span>
                       </Link>
                     </div>
 
-                    <div className="pt-1 border-t border-navy-100 dark:border-navy-700">
+                    <div className="pt-1 border-t border-zinc-100 dark:border-[#1F2228]">
                       <button
                         onClick={() => {
                           logout();
                           setProfileDropdownOpen(false);
                         }}
-                        className="w-full flex items-center gap-2 px-3 py-2 rounded-xl text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/40 transition-colors text-left"
+                        className="w-full flex items-center gap-2 px-2.5 py-1.5 rounded text-rose-600 dark:text-rose-400 hover:bg-rose-50 dark:hover:bg-rose-950/30 transition-colors text-left"
                       >
-                        <LogOut className="w-4 h-4 text-rose-500" />
-                        <span>Log Out</span>
+                        <LogOut className="w-3.5 h-3.5" />
+                        <span>Sign out</span>
                       </button>
                     </div>
                   </div>
                 )}
               </div>
             ) : (
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-1.5">
                 <Link
                   href="/auth/login"
-                  className="px-3.5 py-2 text-sm font-medium text-navy-700 dark:text-navy-200 hover:text-navy-900 dark:hover:text-white"
+                  className="px-2.5 py-1 text-xs font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white"
                 >
-                  Log In
+                  Log in
                 </Link>
                 <Link
                   href="/auth/register"
-                  className="px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-brand-600 to-royal-600 hover:from-brand-700 hover:to-royal-700 shadow-md shadow-brand-500/20 transition-all hover:scale-[1.02]"
+                  className="px-3 py-1 rounded-md text-xs font-medium text-white bg-zinc-900 dark:bg-zinc-100 dark:text-zinc-900 hover:opacity-90 transition-opacity"
                 >
-                  Sign Up
+                  Sign up
                 </Link>
               </div>
             )}
@@ -251,9 +229,9 @@ export default function Navbar() {
             {!isInterviewRoom && (
               <button
                 onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                className="md:hidden p-2 rounded-xl text-navy-600 dark:text-navy-300 hover:bg-navy-100 dark:hover:bg-navy-800"
+                className="md:hidden p-1.5 rounded-md text-zinc-600 dark:text-zinc-400 hover:bg-zinc-100 dark:hover:bg-zinc-800"
               >
-                {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+                {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
               </button>
             )}
           </div>
@@ -262,7 +240,7 @@ export default function Navbar() {
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && !isInterviewRoom && (
-        <div className="md:hidden px-4 pt-2 pb-4 space-y-1 bg-white dark:bg-navy-900 border-b border-navy-200 dark:border-navy-800">
+        <div className="md:hidden px-4 pt-2 pb-3 space-y-1 bg-white dark:bg-[#090A0C] border-b border-zinc-200 dark:border-[#1F2228]">
           {navLinks.map((link) => {
             const Icon = link.icon;
             const isActive = pathname === link.href;
@@ -271,13 +249,13 @@ export default function Navbar() {
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className={`flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-sm font-medium ${
+                className={`flex items-center gap-2.5 px-3 py-2 rounded-md text-xs font-medium ${
                   isActive
-                    ? 'bg-brand-50 dark:bg-brand-950/70 text-brand-600 dark:text-brand-300 font-semibold'
-                    : 'text-navy-600 dark:text-navy-300 hover:bg-navy-50 dark:hover:bg-navy-800'
+                    ? 'bg-zinc-100 dark:bg-[#1A1D24] text-zinc-900 dark:text-white font-medium'
+                    : 'text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-[#13151A]'
                 }`}
               >
-                <Icon className="w-5 h-5 text-navy-400" />
+                <Icon className="w-4 h-4 opacity-70" />
                 <span>{link.label}</span>
               </Link>
             );

@@ -140,16 +140,16 @@ export default function InterviewSetupPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8">
       {/* Title */}
-      <div className="space-y-2">
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 dark:bg-brand-950/70 text-brand-600 dark:text-brand-300 border border-brand-200/60 dark:border-brand-800">
+      <div className="space-y-1.5">
+        <div className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-500">
           <Sliders className="w-3.5 h-3.5" />
-          <span>Simulation Configuration</span>
+          <span>Session setup</span>
         </div>
-        <h1 className="text-3xl font-extrabold text-navy-900 dark:text-white tracking-tight">
-          Configure Your AI Mock Interview
+        <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight">
+          Configure interview session
         </h1>
-        <p className="text-sm text-navy-500 dark:text-navy-400">
-          Customize your role, difficulty, questions, and optionally provide your resume to receive realistic company-grade interview questions.
+        <p className="text-xs text-zinc-500">
+          Select role, target difficulty level, and optionally upload a resume to ground questions in your project experience.
         </p>
       </div>
 
@@ -387,28 +387,28 @@ export default function InterviewSetupPage() {
         </div>
 
         {/* Submit & Start Button */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-6 rounded-3xl bg-navy-50 dark:bg-navy-900 border border-navy-200/80 dark:border-navy-800">
-          <div className="text-xs text-navy-600 dark:text-navy-400 space-y-0.5">
-            <p className="font-bold text-navy-900 dark:text-white">
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-xl bg-white dark:bg-[#111215] border border-zinc-200 dark:border-[#1F2228]">
+          <div className="text-xs text-zinc-600 dark:text-zinc-400 space-y-0.5">
+            <p className="font-medium text-zinc-900 dark:text-zinc-100">
               {jobRole} • {difficulty} • {questionCount} Questions
             </p>
-            <p>Voice answer input & live transcription enabled in the interview room.</p>
+            <p className="text-[11px] text-zinc-500">Voice answer transcription & timer active in the session room.</p>
           </div>
 
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full sm:w-auto flex items-center justify-center gap-2.5 px-8 py-3.5 rounded-2xl bg-gradient-to-r from-brand-600 via-royal-600 to-violet-600 hover:from-brand-700 hover:to-royal-700 text-white font-extrabold text-sm shadow-xl shadow-brand-500/25 transition-all hover:scale-[1.02] active:scale-[0.99] disabled:opacity-70"
+            className="w-full sm:w-auto flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-zinc-900 dark:bg-zinc-100 text-white dark:text-zinc-900 font-medium text-xs hover:opacity-90 transition-opacity disabled:opacity-60"
           >
             {isSubmitting ? (
               <>
-                <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                <span>Generating Questions with AI...</span>
+                <div className="w-3.5 h-3.5 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+                <span>Generating questions...</span>
               </>
             ) : (
               <>
-                <Play className="w-4 h-4 fill-white" />
-                <span>Begin Mock Interview</span>
+                <Play className="w-3.5 h-3.5 fill-current" />
+                <span>Begin mock session</span>
               </>
             )}
           </button>
