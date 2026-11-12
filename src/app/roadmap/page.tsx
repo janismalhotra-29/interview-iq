@@ -15,13 +15,11 @@ import {
   PlayCircle,
   Target,
   ArrowRight,
-  Flame,
 } from 'lucide-react';
 import { LearningRecommendation } from '@/types';
 
 export default function RoadmapPage() {
   const { user, profile } = useAuth();
-  // Instant render from cache: 0ms latency
   const [recommendations, setRecommendations] = useState<LearningRecommendation[]>(() => {
     const cached = getCached<any>(`analytics_${user?.id}`);
     return cached?.recommendations || DEFAULT_DEMO_ANALYTICS.recommendations;
@@ -56,80 +54,75 @@ export default function RoadmapPage() {
   };
 
   const completedCount = recommendations.filter((r) => r.is_completed).length;
-  const progressPercent = recommendations.length > 0 ? Math.round((completedCount / recommendations.length) * 100) : 0;
+  const progressPercent =
+    recommendations.length > 0 ? Math.round((completedCount / recommendations.length) * 100) : 0;
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-8">
+      {/* Editorial Header */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-[var(--rule)]">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-300 border border-brand-200 dark:border-brand-800 mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold text-[var(--accent)] bg-[var(--accent-subtle)] border border-[var(--accent)]/20 mb-3">
             <Map className="w-3.5 h-3.5" />
             <span>AI Curriculum Engine</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-navy-950 dark:text-white tracking-tight">
-            Personalized Learning Roadmap
+          <h1 className="font-editorial text-3xl sm:text-4xl text-[var(--text)] tracking-tight">
+            Personalized Learning <em>Roadmap</em>
           </h1>
-          <p className="text-sm text-navy-500 dark:text-navy-400">
-            Dynamically customized revision tracks generated from your weaknesses and missed concepts in recent mock interviews.
+          <p className="text-sm text-[var(--text-muted)] mt-1.5 max-w-xl">
+            Revision tracks dynamically compiled from weaknesses and missed concepts in recent mock interviews.
           </p>
         </div>
 
-        <Link
-          href="/interview/setup"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md shadow-brand-500/20 transition-all self-start sm:self-center"
-        >
+        <Link href="/interview/setup" className="btn-enfold inline-flex items-center gap-2 self-start sm:self-auto">
           <PlayCircle className="w-4 h-4" />
-          <span>Launch Recommended Mock</span>
+          <span>Practice Weak Topics</span>
         </Link>
       </div>
 
-      {/* Progress Tracker Card */}
-      <div className="p-6 sm:p-8 rounded-3xl bg-gradient-to-r from-navy-900 to-brand-950 text-white shadow-xl space-y-4">
+      {/* Progress Tracker Card - Enfold Paper Style */}
+      <div className="paper p-6 sm:p-7 rounded-2xl space-y-4">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
           <div>
-            <h2 className="text-base font-extrabold flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-amber-400" />
-              <span>Target Role: {profile?.target_role || 'Full Stack Developer'}</span>
+            <h2 className="font-editorial text-xl text-[var(--text)] flex items-center gap-2">
+              <Target className="w-5 h-5 text-[var(--accent)]" />
+              <span>Target Role: {profile?.target_role || 'Full Stack Engineer'}</span>
             </h2>
-            <p className="text-xs text-navy-300 mt-1">
+            <p className="text-xs text-[var(--text-muted)] mt-1">
               {completedCount} of {recommendations.length} recommended topics mastered
             </p>
           </div>
-          <div className="text-2xl font-black text-brand-300 sm:text-right">
-            {progressPercent}% Completed
+          <div className="font-editorial text-2xl font-semibold text-[var(--accent)] sm:text-right">
+            {progressPercent}% <span className="text-xs font-mono font-normal text-[var(--text-muted)]">Completed</span>
           </div>
         </div>
 
-        <div className="w-full h-2.5 rounded-full bg-white/10 overflow-hidden">
+        <div className="w-full h-2 rounded-full bg-[var(--rule)] overflow-hidden">
           <div
-            className="h-full bg-gradient-to-r from-brand-400 to-emerald-400 transition-all duration-300"
+            className="h-full bg-[var(--accent)] transition-all duration-300"
             style={{ width: `${progressPercent}%` }}
           />
         </div>
       </div>
 
       {/* Recommendation Action Cards List */}
-      <div className="space-y-4">
+      <div className="space-y-3">
         {recommendations.length === 0 ? (
-          <div className="p-8 text-center rounded-3xl bg-white dark:bg-navy-850 border border-navy-100 dark:border-navy-750 text-xs text-navy-400">
+          <div className="paper p-10 text-center rounded-2xl text-xs text-[var(--text-muted)]">
             No recommendations generated yet. Complete a mock interview session to unlock tailored practice topics.
           </div>
         ) : (
           recommendations.map((rec, idx) => (
             <div
-              key={rec.id}
-              className={`p-6 rounded-3xl border transition-all flex flex-col sm:flex-row sm:items-start justify-between gap-4 ${
-                rec.is_completed
-                  ? 'bg-navy-50/40 dark:bg-navy-900/20 border-navy-200/50 dark:border-navy-800 opacity-75'
-                  : 'bg-white dark:bg-navy-850 border-navy-100 dark:border-navy-750 shadow-xs hover:border-brand-300'
+              key={rec.id || idx}
+              className={`paper p-5 sm:p-6 rounded-2xl transition-all ${
+                rec.is_completed ? 'opacity-65' : ''
               }`}
             >
               <div className="flex items-start gap-4">
                 <button
-                  type="button"
                   onClick={() => toggleComplete(rec.id)}
-                  className="mt-1 text-navy-400 hover:text-brand-600 transition-colors shrink-0"
+                  className="mt-1 shrink-0 text-[var(--text-muted)] hover:text-[var(--accent)] transition-colors"
                 >
                   {rec.is_completed ? (
                     <CheckCircle2 className="w-5 h-5 text-emerald-600" />
@@ -138,52 +131,47 @@ export default function RoadmapPage() {
                   )}
                 </button>
 
-                <div className="space-y-2">
-                  <div className="flex flex-wrap items-center gap-2">
-                    <span className="font-extrabold text-base text-navy-900 dark:text-white">
+                <div className="flex-1 space-y-2">
+                  <div className="flex flex-wrap items-center justify-between gap-2">
+                    <h3
+                      className={`font-editorial text-lg text-[var(--text)] font-medium ${
+                        rec.is_completed ? 'line-through text-[var(--text-muted)]' : ''
+                      }`}
+                    >
                       {rec.topic}
-                    </span>
-                    <span className="text-[10px] px-2.5 py-0.5 rounded-full font-bold bg-brand-50 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200/50">
-                      {rec.category}
-                    </span>
-                    <span className="text-[10px] px-2 py-0.5 rounded font-semibold bg-navy-100 dark:bg-navy-800 text-navy-600 dark:text-navy-300">
-                      {rec.difficulty}
+                    </h3>
+                    <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded-full border border-[var(--rule)] text-[var(--text-muted)]">
+                      Priority #{idx + 1}
                     </span>
                   </div>
 
-                  <p className="text-xs text-navy-600 dark:text-navy-300 leading-relaxed">
-                    {rec.description}
+                  <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+                    {rec.description || (rec as any).reason}
                   </p>
 
-                  {rec.resource_url && (
-                    <div className="pt-1">
+                  <div className="flex flex-wrap items-center gap-3 pt-2">
+                    {rec.resource_url && (
                       <a
                         href={rec.resource_url}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center gap-1.5 text-xs font-bold text-brand-600 dark:text-brand-400 hover:underline"
+                        className="inline-flex items-center gap-1.5 text-xs text-[var(--accent)] hover:underline font-mono"
                       >
                         <BookOpen className="w-3.5 h-3.5" />
-                        <span>Curated Study Guide / Problem</span>
+                        <span>Recommended Guide</span>
                         <ExternalLink className="w-3 h-3" />
                       </a>
-                    </div>
-                  )}
-                </div>
-              </div>
+                    )}
 
-              <div className="self-end sm:self-center shrink-0">
-                <button
-                  type="button"
-                  onClick={() => toggleComplete(rec.id)}
-                  className={`px-3 py-1.5 rounded-xl text-xs font-semibold border transition-colors ${
-                    rec.is_completed
-                      ? 'bg-emerald-50 dark:bg-emerald-950/60 text-emerald-700 dark:text-emerald-300 border-emerald-200'
-                      : 'bg-navy-100 dark:bg-navy-800 text-navy-700 dark:text-navy-200 border-navy-200 dark:border-navy-700 hover:bg-navy-200'
-                  }`}
-                >
-                  {rec.is_completed ? 'Completed' : 'Mark Done'}
-                </button>
+                    <Link
+                      href={`/interview/setup?topic=${encodeURIComponent(rec.topic)}`}
+                      className="inline-flex items-center gap-1 text-xs text-[var(--text)] hover:text-[var(--accent)] font-mono ml-auto"
+                    >
+                      <span>Drill this topic</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </Link>
+                  </div>
+                </div>
               </div>
             </div>
           ))

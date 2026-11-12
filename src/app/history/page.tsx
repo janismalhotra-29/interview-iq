@@ -13,14 +13,12 @@ import {
   Filter,
   FileText,
   PlayCircle,
-  CheckCircle2,
-  AlertCircle,
+  Sparkles,
 } from 'lucide-react';
 import { InterviewSession } from '@/types';
 
 export default function HistoryPage() {
   const { user } = useAuth();
-  // Instant render from cache: 0ms latency
   const [sessions, setSessions] = useState<InterviewSession[]>(() => {
     return getCached(`interviews_${user?.id}`) || DEFAULT_DEMO_SESSIONS;
   });
@@ -60,50 +58,47 @@ export default function HistoryPage() {
   const uniqueRoles = Array.from(new Set(sessions.map((s) => s.job_role)));
 
   return (
-    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+    <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+      {/* Editorial Header */}
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-[var(--rule)]">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-300 border border-brand-200 dark:border-brand-800 mb-2">
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold text-[var(--accent)] bg-[var(--accent-subtle)] border border-[var(--accent)]/20 mb-3">
             <History className="w-3.5 h-3.5" />
             <span>Complete Session Archive</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-navy-950 dark:text-white tracking-tight">
-            Interview History & Transcripts
+          <h1 className="font-editorial text-3xl sm:text-4xl text-[var(--text)] tracking-tight">
+            Interview History &amp; <em>Transcripts</em>
           </h1>
-          <p className="text-sm text-navy-500 dark:text-navy-400">
-            Open past mock sessions to review questions, candidate answers, and detailed model answers.
+          <p className="text-sm text-[var(--text-muted)] mt-1.5 max-w-xl">
+            Every technical response, voice recording, rubric breakdown, and suggested model answer preserved in clean, calm pages.
           </p>
         </div>
 
-        <Link
-          href="/interview/setup"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md shadow-brand-500/20 transition-all self-start sm:self-center"
-        >
+        <Link href="/interview/setup" className="btn-enfold inline-flex items-center gap-2 self-start sm:self-auto">
           <PlayCircle className="w-4 h-4" />
-          <span>New Mock Session</span>
+          <span>New Session</span>
         </Link>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="flex flex-col sm:flex-row items-center gap-3 p-4 rounded-2xl bg-white dark:bg-navy-850 border border-navy-100 dark:border-navy-750 shadow-xs">
+      <div className="paper p-3 sm:p-4 rounded-2xl flex flex-col sm:flex-row items-center gap-3">
         <div className="relative flex-1 w-full">
-          <Search className="w-4 h-4 text-navy-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
+          <Search className="w-4 h-4 text-[var(--text-muted)] absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
             type="text"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder="Search interviews by role or title..."
-            className="w-full pl-10 pr-4 py-2 rounded-xl bg-navy-50 dark:bg-navy-900/60 border border-navy-200 dark:border-navy-700 text-xs text-navy-900 dark:text-white placeholder:text-navy-400 focus:ring-2 focus:ring-brand-500"
+            placeholder="Filter sessions by role, topic or title..."
+            className="w-full pl-10 pr-4 py-2 rounded-xl bg-[var(--bg)] border border-[var(--rule)] text-xs text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)] transition-colors"
           />
         </div>
 
         <div className="flex items-center gap-2 w-full sm:w-auto">
-          <Filter className="w-4 h-4 text-navy-400 shrink-0" />
+          <Filter className="w-4 h-4 text-[var(--text-muted)] shrink-0" />
           <select
             value={roleFilter}
             onChange={(e) => setRoleFilter(e.target.value)}
-            className="w-full sm:w-auto px-3 py-2 rounded-xl bg-navy-50 dark:bg-navy-900/60 border border-navy-200 dark:border-navy-700 text-xs text-navy-800 dark:text-navy-200 font-medium"
+            className="w-full sm:w-auto px-3 py-2 rounded-xl bg-[var(--bg)] border border-[var(--rule)] text-xs text-[var(--text)] font-medium focus:outline-none focus:border-[var(--accent)] transition-colors"
           >
             <option value="all">All Roles</option>
             {uniqueRoles.map((r) => (
@@ -117,94 +112,77 @@ export default function HistoryPage() {
 
       {/* Sessions List */}
       {filteredSessions.length === 0 ? (
-        <div className="p-12 text-center rounded-3xl bg-white dark:bg-navy-850 border border-navy-100 dark:border-navy-750 space-y-3">
-          <FileText className="w-12 h-12 text-navy-300 mx-auto" />
-          <h3 className="font-bold text-navy-900 dark:text-white text-base">
+        <div className="paper p-12 text-center rounded-2xl space-y-3">
+          <FileText className="w-10 h-10 text-[var(--text-muted)] mx-auto opacity-40" />
+          <h3 className="font-editorial text-lg text-[var(--text)]">
             No Interview Sessions Found
           </h3>
-          <p className="text-xs text-navy-500 max-w-sm mx-auto">
+          <p className="text-xs text-[var(--text-muted)] max-w-sm mx-auto">
             {searchTerm || roleFilter !== 'all'
               ? 'No sessions match your search filters.'
-              : 'You have not conducted any mock interviews yet. Launch your first one now!'}
+              : 'You have not conducted any mock interviews yet. Launch your first one now.'}
           </p>
-          <Link
-            href="/interview/setup"
-            className="inline-block mt-2 px-5 py-2.5 rounded-xl bg-brand-600 text-white font-bold text-xs"
-          >
-            Start an Interview
-          </Link>
+          <div className="pt-2">
+            <Link href="/interview/setup" className="btn-enfold inline-flex items-center gap-2">
+              <span>Start an Interview</span>
+            </Link>
+          </div>
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-3">
           {filteredSessions.map((s) => (
             <div
               key={s.id}
-              className="p-6 rounded-3xl bg-white dark:bg-navy-850 border border-navy-100 dark:border-navy-750 shadow-xs hover:border-brand-200 dark:hover:border-brand-700 transition-all flex flex-col md:flex-row md:items-center justify-between gap-4"
+              className="paper p-5 sm:p-6 rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:border-[var(--accent)]/40 transition-colors"
             >
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="font-extrabold text-base text-navy-900 dark:text-white">
+                  <h3 className="font-editorial text-lg text-[var(--text)] font-medium">
                     {s.title}
                   </h3>
-                  <span
-                    className={`text-[10px] px-2.5 py-0.5 rounded-full font-bold ${
-                      s.difficulty === 'Hard'
-                        ? 'bg-rose-100 text-rose-700 dark:bg-rose-950 dark:text-rose-300'
-                        : s.difficulty === 'FAANG'
-                        ? 'bg-purple-100 text-purple-700 dark:bg-purple-950 dark:text-purple-300'
-                        : 'bg-blue-100 text-blue-700 dark:bg-blue-950 dark:text-blue-300'
-                    }`}
-                  >
+                  <span className="text-[10px] px-2 py-0.5 rounded-full font-mono uppercase tracking-wider bg-[var(--accent-subtle)] text-[var(--accent)] border border-[var(--accent)]/20">
                     {s.difficulty}
                   </span>
-                  <span className="text-[10px] px-2 py-0.5 rounded bg-navy-100 dark:bg-navy-800 text-navy-600 dark:text-navy-300 font-semibold">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full font-mono text-[var(--text-muted)] border border-[var(--rule)]">
                     {s.interview_type}
                   </span>
                 </div>
 
-                <div className="flex flex-wrap items-center gap-3 text-xs text-navy-500 dark:text-navy-400">
-                  <span className="flex items-center gap-1">
-                    <Calendar className="w-3.5 h-3.5 text-navy-400" />
+                <div className="flex flex-wrap items-center gap-3 text-xs text-[var(--text-muted)]">
+                  <span className="flex items-center gap-1.5">
+                    <Calendar className="w-3.5 h-3.5 opacity-60" />
                     {new Date(s.created_at).toLocaleDateString('en-US', {
                       month: 'short',
                       day: 'numeric',
                       year: 'numeric',
                     })}
                   </span>
-                  <span>•</span>
-                  <span>Role: {s.job_role}</span>
-                  <span>•</span>
+                  <span className="text-[var(--rule)]">/</span>
+                  <span>Target: <strong className="text-[var(--text)] font-medium">{s.job_role}</strong></span>
+                  <span className="text-[var(--rule)]">/</span>
                   <span>{s.question_count} Questions</span>
-                  <span>•</span>
+                  <span className="text-[var(--rule)]">/</span>
                   <span>{Math.round((s.time_taken_seconds || 600) / 60)} mins</span>
                 </div>
               </div>
 
               {/* Score and action */}
-              <div className="flex items-center gap-5 self-end md:self-center">
+              <div className="flex items-center gap-6 self-end md:self-center">
                 <div className="text-right">
-                  <div className="text-2xl font-black text-navy-900 dark:text-white">
-                    {s.overall_score ? `${s.overall_score}%` : 'In Progress'}
+                  <div className="font-editorial text-2xl text-[var(--text)] font-semibold">
+                    {s.overall_score ? `${s.overall_score}%` : 'Pending'}
                   </div>
-                  <div
-                    className={`text-xs font-bold ${
-                      s.performance_status === 'Exceptional'
-                        ? 'text-emerald-600 dark:text-emerald-400'
-                        : s.performance_status === 'Strong'
-                        ? 'text-blue-600 dark:text-blue-400'
-                        : 'text-amber-600 dark:text-amber-400'
-                    }`}
-                  >
+                  <div className="text-[11px] font-mono uppercase tracking-wider text-[var(--accent)]">
                     {s.performance_status || 'Unfinished'}
                   </div>
                 </div>
 
                 <Link
                   href={s.status === 'completed' ? `/report/${s.id}` : `/interview/${s.id}`}
-                  className="flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold bg-navy-50 dark:bg-navy-800 text-navy-700 dark:text-navy-200 border border-navy-200 dark:border-navy-700 hover:bg-brand-50 hover:text-brand-600 transition-colors"
+                  className="btn-enfold-ghost inline-flex items-center gap-1.5 text-xs py-2 px-4"
                 >
                   <span>{s.status === 'completed' ? 'View Report' : 'Resume'}</span>
-                  <ArrowRight className="w-3.5 h-3.5" />
+                  <ArrowRight className="w-3.5 h-3.5 text-[var(--accent)]" />
                 </Link>
               </div>
             </div>
