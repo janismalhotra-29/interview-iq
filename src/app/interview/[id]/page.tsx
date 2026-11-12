@@ -68,6 +68,56 @@ export default function InterviewRoomPage() {
     }
     const fetchSession = async () => {
       try {
+        if (sessionId === 'demo') {
+          const demoSession: InterviewSession = {
+            id: 'demo',
+            user_id: user?.id || 'd0000000-0000-0000-0000-000000000001',
+            title: 'Full Stack Architecture Live Assessment',
+            job_role: 'Full Stack Developer',
+            experience_level: 'Intermediate',
+            interview_type: 'Technical',
+            difficulty: 'Hard',
+            question_count: 3,
+            duration_minutes: 20,
+            time_taken_seconds: 0,
+            status: 'in_progress',
+            created_at: new Date().toISOString(),
+            questions: [
+              {
+                id: 'q-demo-1',
+                session_id: 'demo',
+                question_number: 1,
+                category: 'React Internals',
+                question_text: 'How does React’s Virtual DOM and Reconciliation algorithm work, and how does the React 18 Fiber architecture enable concurrent rendering?',
+                expected_concepts: ['Virtual DOM', 'Reconciliation', 'Fiber Node', 'Time Slicing', 'useTransition'],
+                difficulty: 'Hard',
+              },
+              {
+                id: 'q-demo-2',
+                session_id: 'demo',
+                question_number: 2,
+                category: 'System Design',
+                question_text: 'Design a distributed rate limiter that handles 100,000 requests per second across multiple data centers with low latency.',
+                expected_concepts: ['Token Bucket', 'Sliding Window Counter', 'Redis Cluster', 'Local In-Memory Cache'],
+                difficulty: 'Hard',
+              },
+              {
+                id: 'q-demo-3',
+                session_id: 'demo',
+                question_number: 3,
+                category: 'Behavioral & Leadership',
+                question_text: 'Describe a situation where you had a strong technical disagreement with a peer about architecture. How did you resolve it?',
+                expected_concepts: ['STAR Framework', 'Objective Benchmarking', 'Empathy', 'Consensus Building'],
+                difficulty: 'Medium',
+              },
+            ],
+          };
+          setSession(demoSession);
+          setQuestions(demoSession.questions || []);
+          setLoading(false);
+          return;
+        }
+
         const res = await fetch(`/api/interviews/${sessionId}`);
         if (res.ok) {
           const data = await res.json();
