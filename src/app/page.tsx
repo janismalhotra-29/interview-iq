@@ -8,30 +8,20 @@ import {
   MicOff,
   Sparkles,
   CheckCircle2,
-  X,
   Play,
-  RotateCcw,
   Clock,
   Layers,
-  Terminal,
   ArrowRight,
-  Maximize2,
-  Video,
-  VideoOff,
-  Cpu,
-  Shield,
-  Eye,
-  Sliders,
 } from 'lucide-react';
 
 export default function LandingPage() {
   // Active Chapter for Left Spine Navigation
-  const [activeChapter, setActiveChapter] = useState<'start' | 'mess' | 'fold' | 'inside' | 'keys' | 'cockpit'>('start');
+  const [activeChapter, setActiveChapter] = useState<'start' | 'mess' | 'fold' | 'inside' | 'keys'>('start');
 
   // The Mess vs Fold toggle state
   const [isMessFolded, setIsMessFolded] = useState(false);
 
-  // 4-Fold Card State
+  // 4-Section Interactive Card State
   const [openFolds, setOpenFolds] = useState<Record<string, boolean>>({
     question: true,
     answer: true,
@@ -40,7 +30,6 @@ export default function LandingPage() {
   });
 
   // Demo Question & Answer State
-  const [currentRole, setCurrentRole] = useState<'fs' | 'sys' | 'be'>('fs');
   const [answerText, setAnswerText] = useState(
     'React maintains an in-memory Virtual DOM tree. When state changes, reconciliation computes an O(n) diff using heuristics to update the actual DOM. In React 18, the Fiber architecture splits work into interruptible units, allowing urgent user interactions to take priority over background rendering.'
   );
@@ -53,12 +42,6 @@ export default function LandingPage() {
   // AI Scoring State
   const [isGrading, setIsGrading] = useState(false);
   const [hasGraded, setHasGraded] = useState(false);
-
-  // Blue Cockpit Modal State ("when i click on blue coulour interfaces comeee")
-  const [isCockpitOpen, setIsCockpitOpen] = useState(false);
-  const [cockpitVideoActive, setCockpitVideoActive] = useState(true);
-  const [cockpitTimer, setCockpitTimer] = useState(1182); // 19:42
-  const [activeCockpitTab, setActiveCockpitTab] = useState<'answer' | 'rubric' | 'terminal'>('answer');
 
   // Mechanical Keyboard Active Key State
   const [pressedKey, setPressedKey] = useState<string | null>(null);
@@ -81,7 +64,7 @@ export default function LandingPage() {
       osc.start();
       osc.stop(ctx.currentTime + 0.05);
     } catch (e) {
-      // AudioContext not allowed before user gesture
+      // AudioContext requires user gesture
     }
   };
 
@@ -111,8 +94,6 @@ export default function LandingPage() {
         toggleFold('rubric');
       } else if (e.key === '4') {
         toggleFold('model');
-      } else if (e.key === 'Escape') {
-        setIsCockpitOpen(false);
       }
     };
 
@@ -198,21 +179,6 @@ export default function LandingPage() {
     }, 700);
   };
 
-  // Cockpit Timer Countdown
-  useEffect(() => {
-    if (!isCockpitOpen) return;
-    const interval = setInterval(() => {
-      setCockpitTimer((prev) => (prev > 0 ? prev - 1 : 0));
-    }, 1000);
-    return () => clearInterval(interval);
-  }, [isCockpitOpen]);
-
-  const formatTimer = (sec: number) => {
-    const m = Math.floor(sec / 60);
-    const s = sec % 60;
-    return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-  };
-
   const scrollToSection = (id: string) => {
     document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
@@ -235,22 +201,17 @@ export default function LandingPage() {
         <button
           onClick={() => { setActiveChapter('fold'); scrollToSection('sc-fold'); }}
           className={`spine-dot ${activeChapter === 'fold' ? 'active' : ''}`}
-          title="A Fold"
+          title="The Structure"
         />
         <button
           onClick={() => { setActiveChapter('inside'); scrollToSection('sc-inside'); }}
           className={`spine-dot ${activeChapter === 'inside' ? 'active' : ''}`}
-          title="Inside"
+          title="Nested Depth"
         />
         <button
           onClick={() => { setActiveChapter('keys'); scrollToSection('sc-keys'); }}
           className={`spine-dot ${activeChapter === 'keys' ? 'active' : ''}`}
           title="Keyboard First"
-        />
-        <button
-          onClick={() => { setIsCockpitOpen(true); }}
-          className="w-2.5 h-2.5 rounded-full bg-blue-500 shadow-sm shadow-blue-400 animate-pulse"
-          title="Open Blue Studio Cockpit"
         />
       </nav>
 
@@ -263,30 +224,29 @@ export default function LandingPage() {
 
         <h1 className="font-editorial text-4xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-[var(--text)] leading-[1.08] max-w-4xl mx-auto">
           Everything you know, <br />
-          <em>neatly folded.</em>
+          <em>neatly structured.</em>
         </h1>
 
         <p className="text-base sm:text-lg text-[var(--text-soft)] max-w-2xl mx-auto leading-relaxed">
           Open only what you need. InterviewIQ keeps your technical questions, voice recordings, 5-parameter rubric scores, and verified model answers tucked into calm sections you open when you want them.
         </p>
 
-        {/* Primary CTA Buttons */}
+        {/* Primary CTA Buttons with Tactile Click Effects */}
         <div className="flex flex-wrap items-center justify-center gap-3 pt-2">
-          {/* Blue Colour Interface Button */}
-          <button
-            onClick={() => setIsCockpitOpen(true)}
-            className="cockpit-neon-btn px-6 py-3 rounded-full text-xs sm:text-sm font-semibold flex items-center gap-2 shadow-lg hover:scale-105 active:scale-95 transition-all"
+          <Link
+            href="/interview/setup"
+            className="btn-accent px-7 py-3 text-xs sm:text-sm flex items-center gap-2 font-semibold"
           >
-            <Sparkles className="w-4 h-4 text-cyan-200" />
-            <span>Launch Blue Studio Cockpit</span>
-          </button>
+            <Play className="w-3.5 h-3.5 fill-current" />
+            <span>Launch Mock Interview</span>
+          </Link>
 
           <Link
             href="/interview/demo"
             className="btn-enfold px-6 py-3 text-xs sm:text-sm flex items-center gap-2"
           >
-            <Play className="w-3.5 h-3.5 fill-current" />
-            <span>Start Live Mock Session</span>
+            <span>Try Live Session Room</span>
+            <ArrowRight className="w-3.5 h-3.5 text-[var(--accent)]" />
           </Link>
 
           <button
@@ -303,7 +263,7 @@ export default function LandingPage() {
         </p>
       </section>
 
-      {/* ── 2. The Mess vs The Fold Section ── */}
+      {/* ── 2. The Mess vs The Structured Section ── */}
       <section id="sc-mess" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 border-t border-[var(--rule)]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div className="space-y-4">
@@ -322,13 +282,13 @@ export default function LandingPage() {
                 onClick={() => { setIsMessFolded(!isMessFolded); playKeyClick(480); }}
                 className="btn-enfold-ghost text-xs px-4 py-2 inline-flex items-center gap-2"
               >
-                <span>{isMessFolded ? 'Unfold the messy notes' : 'Fold it into one calm card'}</span>
+                <span>{isMessFolded ? 'Unfold the messy notes' : 'Tuck it into one calm card'}</span>
                 <span className="cv" style={{ transform: isMessFolded ? 'rotate(45deg)' : 'rotate(-45deg)' }} />
               </button>
             </div>
           </div>
 
-          {/* Interactive Mess / Fold Card */}
+          {/* Interactive Mess / Structured Card */}
           <div className="paper p-6 rounded-2xl relative overflow-hidden transition-all duration-500 min-h-[220px] flex flex-col justify-center">
             {isMessFolded ? (
               <div className="space-y-3 py-4 text-center animate-fadeIn">
@@ -362,23 +322,23 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── 3. The Idea: Interactive 4-Fold Section ── */}
+      {/* ── 3. The Idea: Interactive 4-Section Accordion ── */}
       <section id="sc-fold" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 border-t border-[var(--rule)] space-y-8">
         <div className="text-center space-y-3 max-w-2xl mx-auto">
           <span className="text-xs font-mono uppercase tracking-wider text-[var(--accent)]">
             The Idea
           </span>
           <h2 className="font-editorial text-3xl sm:text-5xl text-[var(--text)] font-semibold">
-            A fold is a section <em>you can close.</em>
+            A section <em>you can open and close.</em>
           </h2>
           <p className="text-sm text-[var(--text-soft)]">
-            Interact with this live session fold below. Use real speech recognition, audio synthesis, and live AI scoring right now.
+            Interact with this live session card below. Use real speech recognition, audio synthesis, and live AI scoring right now.
           </p>
         </div>
 
-        {/* Live Interactive Paper Fold Card */}
+        {/* Live Interactive Paper Card */}
         <div className="paper rounded-2xl overflow-hidden divide-y divide-[var(--rule)] shadow-lg">
-          {/* FOLD 1: The Question */}
+          {/* SECTION 1: The Question */}
           <div>
             <button
               onClick={() => toggleFold('question')}
@@ -394,7 +354,7 @@ export default function LandingPage() {
                 </span>
               </div>
               <span className="text-xs font-mono text-[var(--text-muted)]">
-                {openFolds.question ? 'Close Fold' : 'Open Fold'}
+                {openFolds.question ? 'Close Section' : 'Open Section'}
               </span>
             </button>
 
@@ -420,7 +380,7 @@ export default function LandingPage() {
             )}
           </div>
 
-          {/* FOLD 2: Voice & Real-Time Answer */}
+          {/* SECTION 2: Voice & Real-Time Answer */}
           <div>
             <button
               onClick={() => toggleFold('answer')}
@@ -438,7 +398,7 @@ export default function LandingPage() {
                 )}
               </div>
               <span className="text-xs font-mono text-[var(--text-muted)]">
-                {openFolds.answer ? 'Close Fold' : 'Open Fold'}
+                {openFolds.answer ? 'Close Section' : 'Open Section'}
               </span>
             </button>
 
@@ -479,7 +439,7 @@ export default function LandingPage() {
                   <button
                     onClick={runGradingDemo}
                     disabled={isGrading}
-                    className="btn-enfold text-xs px-4 py-2"
+                    className="btn-accent text-xs px-4 py-2"
                   >
                     <Sparkles className="w-3.5 h-3.5" />
                     <span>{isGrading ? 'AI Evaluating...' : 'Score My Answer (Enter)'}</span>
@@ -489,7 +449,7 @@ export default function LandingPage() {
             )}
           </div>
 
-          {/* FOLD 3: 5-Parameter AI Rubric */}
+          {/* SECTION 3: 5-Parameter AI Rubric */}
           <div>
             <button
               onClick={() => toggleFold('rubric')}
@@ -566,7 +526,7 @@ export default function LandingPage() {
             )}
           </div>
 
-          {/* FOLD 4: Verified Model Answer */}
+          {/* SECTION 4: Verified Model Answer */}
           <div>
             <button
               onClick={() => toggleFold('model')}
@@ -600,16 +560,16 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── 4. Folds Inside Folds Section ── */}
+      {/* ── 4. Nested Depth Section ── */}
       <section id="sc-inside" className="max-w-5xl mx-auto px-4 sm:px-6 py-16 border-t border-[var(--rule)]">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
           <div className="space-y-4">
             <span className="text-xs font-mono uppercase tracking-wider text-[var(--accent)]">
-              Folds Inside Folds
+              Structured Drill-Down
             </span>
             <h2 className="font-editorial text-3xl sm:text-4xl text-[var(--text)] font-semibold leading-tight">
-              Put folds <br />
-              <em>inside folds.</em>
+              Drill down into <br />
+              <em>architectural depth.</em>
             </h2>
             <p className="text-sm text-[var(--text-soft)] leading-relaxed">
               An interview has questions. A question has sub-points. A sub-point has trade-offs and latency benchmarks. Go as deep as you need, and fold right back up in one keystroke.
@@ -653,7 +613,7 @@ export default function LandingPage() {
             Your hands never leave <em>the keyboard.</em>
           </h2>
           <p className="text-sm text-[var(--text-soft)]">
-            Speak, score, switch folds, and advance mock sessions without touching your mouse. Click any key below or press keys on your physical keyboard to test the interactive simulation.
+            Speak, score, switch sections, and advance mock sessions without touching your mouse. Click any key below or press keys on your physical keyboard to test the interactive simulation.
           </p>
         </div>
 
@@ -733,7 +693,7 @@ export default function LandingPage() {
                 SPACE (Voice Record / Stop)
               </div>
               <div
-                onClick={() => { setPressedKey('ESC'); playKeyClick(480); setIsCockpitOpen(false); }}
+                onClick={() => { setPressedKey('ESC'); playKeyClick(480); }}
                 className={`k flex-1 ${pressedKey === 'ESC' ? 'down' : ''}`}
               >
                 ESC
@@ -750,16 +710,16 @@ export default function LandingPage() {
               <kbd className="mr-1">Enter</kbd> Grade Answer
             </div>
             <div className="paper p-2.5 rounded-xl">
-              <kbd className="mr-1">1 - 4</kbd> Switch Folds
+              <kbd className="mr-1">1 - 4</kbd> Switch Sections
             </div>
             <div className="paper p-2.5 rounded-xl">
-              <kbd className="mr-1">Esc</kbd> Close Overlay
+              <kbd className="mr-1">Esc</kbd> Reset Focus
             </div>
           </div>
         </div>
       </section>
 
-      {/* ── 5b. Horizontal Domain Tracks (Sideways Carousel) ── */}
+      {/* ── 6. Horizontal Domain Tracks (Sideways Carousel) ── */}
       <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 border-t border-[var(--rule)] space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
           <div>
@@ -838,277 +798,41 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ── 6. Blue Cockpit Launcher Callout Banner ── */}
+      {/* ── 7. Calm Tactile Closing Card ── */}
       <section className="max-w-5xl mx-auto px-4 sm:px-6 py-14">
-        <div className="cockpit-card rounded-3xl p-8 sm:p-10 relative overflow-hidden text-center space-y-4">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono text-cyan-400 bg-cyan-950/80 border border-cyan-500/30">
-            <Cpu className="w-3.5 h-3.5 text-cyan-400" />
-            <span>Interactive Blue Studio Cockpit</span>
+        <div className="paper rounded-3xl p-8 sm:p-10 relative overflow-hidden text-center space-y-4 shadow-md">
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono text-[var(--accent)] bg-[var(--accent-subtle)] border border-[var(--accent)]/20">
+            <Sparkles className="w-3.5 h-3.5" />
+            <span>Ready to Practice?</span>
           </div>
 
-          <h2 className="font-editorial text-3xl sm:text-4xl text-white font-semibold">
-            Ready for the real technical mock interview?
+          <h2 className="font-editorial text-3xl sm:text-4xl text-[var(--text)] font-semibold">
+            Every technical interview, <em>neatly mastered.</em>
           </h2>
 
-          <p className="text-sm text-slate-300 max-w-xl mx-auto">
-            Experience the full high-tech blue studio interface with webcam face tracking, live audio visualizer waveform, question countdown timer, code editor, and instant AI grading.
+          <p className="text-sm text-[var(--text-soft)] max-w-xl mx-auto leading-relaxed">
+            Practice coding, distributed systems, and STAR behavioral answers with real voice speech recognition and instant 5-parameter rubric evaluation.
           </p>
 
           <div className="flex flex-wrap items-center justify-center gap-4 pt-2">
-            <button
-              onClick={() => setIsCockpitOpen(true)}
-              className="cockpit-neon-btn px-8 py-3.5 rounded-full text-sm font-bold flex items-center gap-2"
+            <Link
+              href="/interview/setup"
+              className="btn-accent px-8 py-3.5 text-sm font-semibold inline-flex items-center gap-2"
             >
-              <Sparkles className="w-4 h-4 text-cyan-200" />
-              <span>Launch Blue Studio Interface</span>
-            </button>
+              <Play className="w-4 h-4 fill-current" />
+              <span>Configure New Mock Session</span>
+            </Link>
 
             <Link
-              href="/interview/demo"
-              className="px-6 py-3.5 rounded-full bg-slate-800 hover:bg-slate-700 text-white border border-slate-700 text-sm font-semibold transition-all inline-flex items-center gap-2"
+              href="/dashboard"
+              className="btn-enfold-ghost px-6 py-3.5 text-sm font-medium inline-flex items-center gap-2"
             >
-              <span>Direct Link to Full Session</span>
-              <ArrowRight className="w-4 h-4 text-cyan-400" />
+              <span>View Readiness Dashboard</span>
+              <ArrowRight className="w-4 h-4 text-[var(--accent)]" />
             </Link>
           </div>
         </div>
       </section>
-
-      {/* ── 7. IMMERSIVE BLUE STUDIO COCKPIT OVERLAY ("when i click on blue coulour interfaces comeee") ── */}
-      {isCockpitOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-md animate-fadeIn">
-          <div className="w-full max-w-5xl max-h-[92vh] overflow-y-auto rounded-3xl cockpit-modal border border-cyan-500/30 shadow-2xl flex flex-col">
-            {/* Cockpit Top Bar */}
-            <div className="flex items-center justify-between p-4 sm:p-5 border-b border-cyan-500/20 bg-slate-900/60">
-              <div className="flex items-center gap-3">
-                <div className="w-3 h-3 rounded-full bg-cyan-400 animate-ping" />
-                <div>
-                  <h3 className="font-mono text-sm sm:text-base font-bold text-white flex items-center gap-2">
-                    <span>STUDIO COCKPIT · FULL STACK ARCHITECTURE</span>
-                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-blue-500/20 text-blue-300 border border-blue-500/30">
-                      LIVE
-                    </span>
-                  </h3>
-                  <p className="text-xs text-slate-400 font-mono">
-                    Candidate Session #IQ-2026-LIVE · 60 FPS Video Mesh
-                  </p>
-                </div>
-              </div>
-
-              <div className="flex items-center gap-3">
-                <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-800 text-cyan-300 font-mono text-xs border border-cyan-500/30">
-                  <Clock className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>{formatTimer(cockpitTimer)}</span>
-                </div>
-
-                <button
-                  onClick={() => setIsCockpitOpen(false)}
-                  className="p-2 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
-                >
-                  <X className="w-5 h-5" />
-                </button>
-              </div>
-            </div>
-
-            {/* Cockpit Main Body: 2 Columns */}
-            <div className="p-4 sm:p-6 grid grid-cols-1 lg:grid-cols-12 gap-5 flex-1 overflow-y-auto">
-              {/* Left Column (5 cols): Webcam Video + Voice Visualizer + AI State */}
-              <div className="lg:col-span-5 space-y-4">
-                {/* Simulated Candidate Video Box */}
-                <div className="relative rounded-2xl overflow-hidden aspect-video bg-slate-950 border border-cyan-500/30 shadow-inner flex flex-col items-center justify-center">
-                  {cockpitVideoActive ? (
-                    <div className="w-full h-full relative flex items-center justify-center bg-gradient-to-br from-slate-900 via-blue-950 to-slate-950">
-                      {/* Face Target Brackets */}
-                      <div className="w-32 h-40 border-2 border-cyan-400/40 rounded-2xl relative animate-pulse flex items-center justify-center">
-                        <div className="absolute top-1 left-2 text-[9px] font-mono text-cyan-400">FACE MESH 99.4%</div>
-                        <div className="w-20 h-20 rounded-full border border-dashed border-cyan-400/30" />
-                      </div>
-
-                      {/* Video Controls Bar */}
-                      <div className="absolute bottom-2 left-2 right-2 flex items-center justify-between px-3 py-1.5 rounded-xl bg-black/60 backdrop-blur-md text-xs font-mono text-slate-300">
-                        <span className="flex items-center gap-1.5 text-emerald-400">
-                          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
-                          Webcam Active
-                        </span>
-                        <button
-                          onClick={() => setCockpitVideoActive(false)}
-                          className="hover:text-white"
-                        >
-                          <VideoOff className="w-3.5 h-3.5" />
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="text-center space-y-2 p-6">
-                      <VideoOff className="w-8 h-8 text-slate-500 mx-auto" />
-                      <p className="text-xs text-slate-400">Webcam Paused</p>
-                      <button
-                        onClick={() => setCockpitVideoActive(true)}
-                        className="px-3 py-1 rounded-lg bg-cyan-600 text-white text-xs font-mono"
-                      >
-                        Enable Video
-                      </button>
-                    </div>
-                  )}
-                </div>
-
-                {/* Real-time Audio Spectrum Waveform Visualizer */}
-                <div className="p-4 rounded-2xl bg-slate-900/80 border border-cyan-500/20 space-y-2">
-                  <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-cyan-400 flex items-center gap-1.5">
-                      <Mic className="w-3.5 h-3.5" /> Live Audio Spectrum
-                    </span>
-                    <span className="text-slate-400">{isListening ? '44.1 kHz Active' : 'Muted'}</span>
-                  </div>
-
-                  {/* Animated Waveform Bars */}
-                  <div className="h-10 flex items-end justify-between gap-1 px-2 pt-2">
-                    {[40, 75, 20, 95, 60, 85, 30, 90, 45, 100, 65, 80, 50, 70, 35, 90, 55, 75, 40, 85].map((h, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 bg-gradient-to-t from-blue-600 to-cyan-400 rounded-full transition-all duration-150"
-                        style={{
-                          height: isListening ? `${h}%` : '15%',
-                          opacity: isListening ? 1 : 0.4,
-                        }}
-                      />
-                    ))}
-                  </div>
-
-                  <div className="pt-1">
-                    <button
-                      onClick={toggleSpeechRecognition}
-                      className={`w-full py-2 rounded-xl text-xs font-mono font-bold flex items-center justify-center gap-2 transition-all ${
-                        isListening
-                          ? 'bg-rose-600 text-white animate-pulse'
-                          : 'bg-cyan-600/20 hover:bg-cyan-600/30 text-cyan-300 border border-cyan-500/40'
-                      }`}
-                    >
-                      {isListening ? <MicOff className="w-4 h-4" /> : <Mic className="w-4 h-4" />}
-                      <span>{isListening ? 'Mute Microphone (Space)' : 'Activate Live Voice Input (Space)'}</span>
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column (7 cols): Question + Answer Terminal + Evaluation */}
-              <div className="lg:col-span-7 space-y-4 flex flex-col">
-                {/* Active Question Banner */}
-                <div className="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-cyan-500/20 space-y-2">
-                  <div className="flex items-center justify-between text-xs font-mono">
-                    <span className="text-cyan-400 font-bold">QUESTION 01 OF 05</span>
-                    <span className="px-2 py-0.5 rounded-full bg-cyan-950 text-cyan-300 border border-cyan-500/30">
-                      Technical Deep Dive
-                    </span>
-                  </div>
-                  <h4 className="font-editorial text-base sm:text-lg text-white font-medium">
-                    "How does React’s Virtual DOM and Reconciliation algorithm work, and how does the React 18 Fiber architecture enable concurrent rendering?"
-                  </h4>
-                </div>
-
-                {/* Tab Switcher: Answer Terminal vs 5-Param Rubric */}
-                <div className="flex items-center gap-2 border-b border-cyan-500/20 pb-2">
-                  <button
-                    onClick={() => setActiveCockpitTab('answer')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all ${
-                      activeCockpitTab === 'answer'
-                        ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
-                        : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    Candidate Terminal Pad
-                  </button>
-                  <button
-                    onClick={() => setActiveCockpitTab('rubric')}
-                    className={`px-3 py-1.5 rounded-lg text-xs font-mono font-semibold transition-all ${
-                      activeCockpitTab === 'rubric'
-                        ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40'
-                        : 'text-slate-400 hover:text-white'
-                    }`}
-                  >
-                    5-Parameter Live Rubric
-                  </button>
-                </div>
-
-                {/* Tab 1: Terminal Pad */}
-                {activeCockpitTab === 'answer' && (
-                  <div className="space-y-3 flex-1 flex flex-col">
-                    <textarea
-                      rows={6}
-                      value={answerText}
-                      onChange={(e) => setAnswerText(e.target.value)}
-                      className="w-full flex-1 p-4 rounded-xl bg-slate-950/90 border border-cyan-500/30 text-cyan-100 font-mono text-xs sm:text-sm focus:outline-none focus:border-cyan-400 leading-relaxed shadow-inner"
-                      placeholder="Type your architectural response or click Activate Voice Input..."
-                    />
-
-                    <div className="flex flex-wrap items-center justify-between gap-3 pt-1">
-                      <span className="text-[11px] font-mono text-slate-400">
-                        Words: {answerText.split(/\s+/).filter(Boolean).length} · Latency: 12ms
-                      </span>
-
-                      <div className="flex items-center gap-2">
-                        <button
-                          onClick={runGradingDemo}
-                          className="cockpit-neon-btn px-4 py-2 rounded-xl text-xs font-mono font-bold flex items-center gap-1.5"
-                        >
-                          <Sparkles className="w-3.5 h-3.5 text-cyan-200" />
-                          <span>Evaluate with Gemini</span>
-                        </button>
-
-                        <Link
-                          href="/interview/demo"
-                          className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white font-mono text-xs font-bold transition-all"
-                        >
-                          Launch Full Session →
-                        </Link>
-                      </div>
-                    </div>
-                  </div>
-                )}
-
-                {/* Tab 2: 5-Parameter Rubric */}
-                {activeCockpitTab === 'rubric' && (
-                  <div className="space-y-3 p-4 rounded-xl bg-slate-950/70 border border-cyan-500/30 text-xs font-mono">
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-slate-300">
-                        <span>Technical Accuracy (30% weight)</span>
-                        <span className="text-cyan-400 font-bold">92%</span>
-                      </div>
-                      <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-blue-500 to-cyan-400" style={{ width: '92%' }} />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-slate-300">
-                        <span>Relevance &amp; Problem Focus (25% weight)</span>
-                        <span className="text-cyan-400 font-bold">90%</span>
-                      </div>
-                      <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-blue-500 to-cyan-400" style={{ width: '90%' }} />
-                      </div>
-                    </div>
-
-                    <div className="space-y-2">
-                      <div className="flex justify-between text-slate-300">
-                        <span>Communication Clarity (20% weight)</span>
-                        <span className="text-cyan-400 font-bold">86%</span>
-                      </div>
-                      <div className="w-full h-1.5 rounded-full bg-slate-800 overflow-hidden">
-                        <div className="h-full bg-gradient-to-r from-blue-500 to-cyan-400" style={{ width: '86%' }} />
-                      </div>
-                    </div>
-
-                    <div className="p-3 rounded-lg bg-blue-950/40 border border-blue-500/30 text-[11px] text-cyan-200">
-                      Overall Weighted Score: <strong>88.6% (Exceptional)</strong>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 }

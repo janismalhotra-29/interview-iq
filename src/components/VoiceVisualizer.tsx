@@ -18,29 +18,29 @@ export default function VoiceVisualizer({
     switch (status) {
       case 'listening':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-100 dark:bg-emerald-950/80 text-emerald-700 dark:text-emerald-300 border border-emerald-300 dark:border-emerald-800 animate-pulse">
-            <Mic className="w-3.5 h-3.5 text-emerald-600" />
-            <span>Listening to Your Voice...</span>
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono text-emerald-600 bg-emerald-500/10 border border-emerald-500/20 animate-pulse">
+            <Mic className="w-3 h-3" />
+            <span>Listening to voice...</span>
           </span>
         );
       case 'speaking':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-violet-100 dark:bg-violet-950/80 text-violet-700 dark:text-violet-300 border border-violet-300 dark:border-violet-800 animate-pulse">
-            <Volume2 className="w-3.5 h-3.5 text-violet-600" />
-            <span>AI Interviewer Speaking</span>
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono text-[var(--accent)] bg-[var(--accent-subtle)] border border-[var(--accent)]/20 animate-pulse">
+            <Volume2 className="w-3 h-3" />
+            <span>Interviewer speaking</span>
           </span>
         );
       case 'thinking':
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-amber-100 dark:bg-amber-950/80 text-amber-700 dark:text-amber-300 border border-amber-300 dark:border-amber-800">
-            <Sparkles className="w-3.5 h-3.5 text-amber-600 animate-spin" />
-            <span>AI Analyzing Answer...</span>
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono text-[var(--accent)] bg-[var(--accent-subtle)] border border-[var(--accent)]/20">
+            <Sparkles className="w-3 h-3 animate-spin" />
+            <span>Evaluating rubric...</span>
           </span>
         );
       default:
         return (
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-navy-100 dark:bg-navy-800 text-navy-600 dark:text-navy-300 border border-navy-200 dark:border-navy-700">
-            <BrainCircuit className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
+          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-mono text-[var(--text-muted)] bg-[var(--active-bg)] border border-[var(--rule)]">
+            <BrainCircuit className="w-3 h-3 text-[var(--accent)]" />
             <span>AI Interviewer Ready</span>
           </span>
         );
@@ -48,44 +48,38 @@ export default function VoiceVisualizer({
   };
 
   return (
-    <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 rounded-2xl bg-gradient-to-r from-navy-50/80 via-white to-brand-50/40 dark:from-navy-900/90 dark:via-navy-850 dark:to-brand-950/40 border border-navy-200/80 dark:border-navy-750 shadow-xs">
+    <div className="paper p-4 sm:p-5 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
       {/* Avatar and status */}
       <div className="flex items-center gap-4">
         <div className="relative">
-          {/* Animated halo rings */}
           {status === 'listening' && (
-            <div className="absolute inset-0 rounded-2xl bg-emerald-500/30 animate-ping"></div>
+            <div className="absolute inset-0 rounded-xl bg-emerald-500/20 animate-ping"></div>
           )}
           {status === 'speaking' && (
-            <div className="absolute inset-0 rounded-2xl bg-violet-500/30 animate-pulse"></div>
-          )}
-          {status === 'thinking' && (
-            <div className="absolute inset-0 rounded-2xl bg-amber-500/30 animate-spin"></div>
+            <div className="absolute inset-0 rounded-xl bg-[var(--accent)]/20 animate-pulse"></div>
           )}
 
           <div
-            className={`relative w-14 h-14 rounded-2xl flex items-center justify-center transition-all shadow-md ${
+            className={`relative w-12 h-12 rounded-xl flex items-center justify-center transition-all ${
               status === 'listening'
-                ? 'bg-gradient-to-tr from-emerald-600 to-teal-500 text-white shadow-emerald-500/25 ring-4 ring-emerald-500/20'
+                ? 'bg-emerald-500/10 text-emerald-600 border border-emerald-500/30'
                 : status === 'speaking'
-                ? 'bg-gradient-to-tr from-violet-600 to-purple-500 text-white shadow-violet-500/25 ring-4 ring-violet-500/20'
-                : status === 'thinking'
-                ? 'bg-gradient-to-tr from-amber-500 to-orange-500 text-white shadow-amber-500/25 ring-4 ring-amber-500/20'
-                : 'bg-gradient-to-tr from-brand-600 via-royal-600 to-violet-600 text-white shadow-brand-500/20'
+                ? 'bg-[var(--accent-subtle)] text-[var(--accent)] border border-[var(--accent)]/30'
+                : 'bg-[var(--accent-subtle)] text-[var(--accent)] border border-[var(--accent)]/20'
             }`}
           >
-            <BrainCircuit className="w-7 h-7" />
+            <BrainCircuit className="w-6 h-6" />
           </div>
         </div>
 
         <div className="flex flex-col">
           <div className="flex items-center gap-2">
-            <h3 className="font-bold text-navy-900 dark:text-white text-sm">
-              InterviewIQ AI Assistant
+            <h3 className="font-editorial text-base text-[var(--text)] font-medium">
+              InterviewIQ Assistant
             </h3>
             {getStatusBadge()}
           </div>
-          <p className="text-xs text-navy-500 dark:text-navy-400 mt-0.5">
+          <p className="text-xs text-[var(--text-muted)] mt-0.5">
             {status === 'listening'
               ? 'Voice recording active. Speak clearly into your microphone.'
               : status === 'speaking'
@@ -98,9 +92,9 @@ export default function VoiceVisualizer({
       </div>
 
       {/* Voice wave bars & listen action */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-3">
         {/* Animated wave bars */}
-        <div className="flex items-center gap-1 h-8 px-3 py-1 rounded-xl bg-white/80 dark:bg-navy-800/80 border border-navy-200/60 dark:border-navy-700/60">
+        <div className="flex items-center gap-1 h-7 px-2.5 py-1 rounded-xl bg-[var(--bg)] border border-[var(--rule)]">
           {[40, 75, 55, 90, 60, 80, 45].map((height, idx) => {
             const isActive = status === 'listening' || status === 'speaking';
             return (
@@ -110,11 +104,11 @@ export default function VoiceVisualizer({
                   status === 'listening'
                     ? 'bg-emerald-500'
                     : status === 'speaking'
-                    ? 'bg-violet-500'
-                    : 'bg-navy-300 dark:bg-navy-600'
+                    ? 'bg-[var(--accent)]'
+                    : 'bg-[var(--rule)]'
                 }`}
                 style={{
-                  height: isActive ? `${Math.max(8, (height * (idx % 2 === 0 ? 0.9 : 1.2)) % 28)}px` : '6px',
+                  height: isActive ? `${Math.max(6, (height * (idx % 2 === 0 ? 0.9 : 1.2)) % 22)}px` : '5px',
                   animation: isActive ? `wave 1s ease-in-out ${idx * 0.15}s infinite` : 'none',
                 }}
               />
@@ -125,10 +119,9 @@ export default function VoiceVisualizer({
         {canSpeak && onListenQuestion && (
           <button
             onClick={onListenQuestion}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold text-navy-700 dark:text-navy-200 bg-white dark:bg-navy-800 border border-navy-200 dark:border-navy-700 hover:bg-navy-50 dark:hover:bg-navy-700/80 transition-all shadow-xs"
-            title="Read question out loud using speech synthesis"
+            className="btn-enfold-ghost text-xs px-3 py-1.5 inline-flex items-center gap-1.5"
           >
-            <Volume2 className="w-3.5 h-3.5 text-brand-600 dark:text-brand-400" />
+            <Volume2 className="w-3.5 h-3.5 text-[var(--accent)]" />
             <span>Read Question</span>
           </button>
         )}

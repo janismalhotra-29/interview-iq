@@ -80,7 +80,22 @@
     justify-content: center;
   }
 
-  /* Enfold Pill Buttons */
+  /* Tactile Universal Button Click & Press Effects */
+  button, .btn-enfold, .btn-enfold-ghost, .btn-accent, a[role="button"] {
+    position: relative;
+    user-select: none;
+    transition: transform 0.12s cubic-bezier(0.2, 0, 0, 1),
+                box-shadow 0.15s ease,
+                background-color 0.15s ease,
+                border-color 0.15s ease,
+                opacity 0.15s ease;
+  }
+
+  button:active, .btn-enfold:active, .btn-enfold-ghost:active, .btn-accent:active {
+    transform: scale(0.96) translateY(1.5px) !important;
+  }
+
+  /* Tactile Pill Buttons */
   .btn-enfold {
     background-color: var(--text);
     color: var(--bg);
@@ -91,13 +106,14 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    transition: opacity 0.15s ease, transform 0.1s ease;
+    box-shadow: 0 1px 3px rgba(31, 29, 26, 0.1);
   }
   .btn-enfold:hover {
-    opacity: 0.92;
+    opacity: 0.94;
+    box-shadow: 0 4px 14px rgba(31, 29, 26, 0.15);
   }
   .btn-enfold:active {
-    transform: scale(0.98);
+    box-shadow: 0 0 0 rgba(0, 0, 0, 0);
   }
 
   .btn-enfold-ghost {
@@ -111,14 +127,31 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
-    transition: background-color 0.15s ease, border-color 0.15s ease;
   }
   .btn-enfold-ghost:hover {
     background-color: var(--active-bg);
     border-color: var(--text-muted);
   }
 
-  /* Enfold Mechanical Interactive Keyboard Simulator */
+  /* Tactile Terracotta Accent Button */
+  .btn-accent {
+    background-color: var(--accent);
+    color: #FFFFFF;
+    border-radius: 9999px;
+    padding: 8px 20px;
+    font-size: 13px;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 35%, transparent);
+  }
+  .btn-accent:hover {
+    filter: brightness(1.06);
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--accent) 45%, transparent);
+  }
+
+  /* Mechanical Interactive Keyboard Simulator */
   .kb {
     background: color-mix(in srgb, var(--text) 5%, var(--paper));
     border: 1px solid var(--rule);
@@ -170,7 +203,7 @@
     transform: translateY(2px);
   }
 
-  /* Enfold Chevron */
+  /* Chevron */
   .cv {
     border-right: 1.8px solid var(--text-muted);
     border-bottom: 1.8px solid var(--text-muted);
@@ -229,34 +262,6 @@
     border-color: var(--accent);
     transform: scale(1.4);
     box-shadow: 0 0 10px var(--accent);
-  }
-
-  /* High-Tech Blue Studio Cockpit Interface Styles */
-  .cockpit-modal {
-    background: radial-gradient(circle at 50% 0%, #111e3b 0%, #070c1a 100%);
-    color: #e2e8f0;
-  }
-
-  .cockpit-card {
-    background: rgba(15, 23, 42, 0.75);
-    backdrop-filter: blur(16px);
-    border: 1px solid rgba(56, 189, 248, 0.2);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  }
-
-  .cockpit-neon-btn {
-    background: linear-gradient(135deg, #2563eb 0%, #06b6d4 100%);
-    color: #ffffff;
-    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
-    transition: all 0.2s ease;
-  }
-  .cockpit-neon-btn:hover {
-    box-shadow: 0 6px 28px rgba(6, 182, 212, 0.6);
-    transform: translateY(-1px);
-  }
-
-  .cockpit-glow {
-    box-shadow: 0 0 25px rgba(56, 189, 248, 0.25);
   }
 }
 
