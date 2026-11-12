@@ -56,6 +56,23 @@
     font-weight: 500;
   }
 
+  /* Page Transition Animations */
+  @keyframes pageEnter {
+    0% {
+      opacity: 0;
+      transform: translateY(6px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-page-enter {
+    animation: pageEnter 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: opacity, transform;
+  }
+
   /* Tactile Paper Cards */
   .paper {
     background-color: var(--paper);

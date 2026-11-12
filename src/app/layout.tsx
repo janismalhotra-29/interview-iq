@@ -16,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className="min-h-screen flex flex-col bg-slate-50/50 dark:bg-navy-950 text-navy-900 dark:text-navy-50 antialiased selection:bg-brand-500 selection:text-white">
+      <body className="min-h-screen flex flex-col bg-[var(--bg)] text-[var(--text)] antialiased selection:bg-[var(--accent)] selection:text-white">
         <AuthProvider>
           <Navbar />
           <main className="flex-1">
