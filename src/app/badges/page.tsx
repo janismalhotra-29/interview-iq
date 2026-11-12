@@ -14,7 +14,7 @@ import {
   CheckCircle2,
   Lock,
   PlayCircle,
-  Star,
+  Sparkles,
 } from 'lucide-react';
 import { UserBadge } from '@/types';
 
@@ -65,7 +65,6 @@ const ALL_SYSTEM_BADGES = [
 
 export default function BadgesPage() {
   const { user } = useAuth();
-  // Instant render from cache: 0ms latency
   const [unlockedBadges, setUnlockedBadges] = useState<UserBadge[]>(() => {
     const cached = getCached<any>(`analytics_${user?.id}`);
     return cached?.badges || DEFAULT_DEMO_ANALYTICS.badges;
@@ -96,46 +95,48 @@ export default function BadgesPage() {
   const unlockedKeys = new Set(unlockedBadges.map((b) => b.badge_key));
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+    <div className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-8">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-[var(--rule)]">
         <div>
-          <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-300 border border-brand-200 dark:border-brand-800 mb-2">
-            <Trophy className="w-3.5 h-3.5 text-amber-500" />
+          <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-semibold text-[var(--accent)] bg-[var(--accent-subtle)] border border-[var(--accent)]/20 mb-3">
+            <Trophy className="w-3.5 h-3.5" />
             <span>Gamified Milestones</span>
           </div>
-          <h1 className="text-3xl font-extrabold text-navy-950 dark:text-white tracking-tight">
-            Progress Badges & Achievements
+          <h1 className="font-editorial text-3xl sm:text-4xl text-[var(--text)] tracking-tight">
+            Progress Badges &amp; <em>Achievements</em>
           </h1>
-          <p className="text-sm text-navy-500 dark:text-navy-400">
+          <p className="text-sm text-[var(--text-muted)] mt-1.5 max-w-xl">
             Earn engineering distinctions as you practice, eliminate gaps, and elevate your interview scoring.
           </p>
         </div>
 
-        <Link
-          href="/interview/setup"
-          className="inline-flex items-center gap-2 px-5 py-2.5 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-xs shadow-md shadow-brand-500/20 transition-all self-start sm:self-center"
-        >
+        <Link href="/interview/setup" className="btn-enfold inline-flex items-center gap-2 self-start sm:self-auto">
           <PlayCircle className="w-4 h-4" />
           <span>Earn Next Badge</span>
         </Link>
       </div>
 
-      {/* Summary Box */}
-      <div className="p-6 rounded-3xl bg-gradient-to-r from-brand-600 via-royal-600 to-violet-600 text-white shadow-xl flex items-center justify-between">
+      {/* Summary Box - Calm Tactile Paper Style */}
+      <div className="paper p-6 sm:p-7 rounded-2xl flex items-center justify-between gap-4">
         <div className="space-y-1">
-          <h2 className="text-lg font-bold">Your Achievement Trophy Shelf</h2>
-          <p className="text-xs text-brand-100">
-            {unlockedBadges.length} of {ALL_SYSTEM_BADGES.length} badges unlocked
+          <h2 className="font-editorial text-xl text-[var(--text)] font-medium">
+            Your Achievement Trophy Shelf
+          </h2>
+          <p className="text-xs text-[var(--text-muted)]">
+            {unlockedBadges.length} of {ALL_SYSTEM_BADGES.length} distinctions unlocked
           </p>
         </div>
-        <div className="text-3xl font-black bg-white/20 backdrop-blur-md px-4 py-2 rounded-2xl">
-          {unlockedBadges.length}/{ALL_SYSTEM_BADGES.length}
+
+        <div className="flex items-center gap-2">
+          <div className="font-editorial text-3xl font-semibold text-[var(--accent)] px-4 py-1.5 rounded-xl bg-[var(--accent-subtle)] border border-[var(--accent)]/20">
+            {unlockedBadges.length}/{ALL_SYSTEM_BADGES.length}
+          </div>
         </div>
       </div>
 
       {/* Badges Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
         {ALL_SYSTEM_BADGES.map((b) => {
           const isUnlocked = unlockedKeys.has(b.key);
           const Icon = b.icon;
@@ -143,30 +144,31 @@ export default function BadgesPage() {
           return (
             <div
               key={b.key}
-              className={`p-6 rounded-3xl border transition-all space-y-4 flex flex-col justify-between ${
+              className={`paper p-5 sm:p-6 rounded-2xl transition-all space-y-4 flex flex-col justify-between ${
                 isUnlocked
-                  ? 'bg-white dark:bg-navy-850 border-brand-200 dark:border-brand-800 shadow-sm hover:shadow-md'
-                  : 'bg-navy-50/50 dark:bg-navy-900/30 border-dashed border-navy-200 dark:border-navy-800 opacity-60'
+                  ? 'border-[var(--rule)] hover:border-[var(--accent)]/40 shadow-xs'
+                  : 'border-dashed border-[var(--rule)] opacity-55'
               }`}
             >
               <div className="space-y-3">
                 <div className="flex items-center justify-between">
                   <div
-                    className={`w-12 h-12 rounded-2xl flex items-center justify-center ${
+                    className={`w-11 h-11 rounded-xl flex items-center justify-center ${
                       isUnlocked
-                        ? 'bg-gradient-to-tr from-brand-600 to-royal-600 text-white shadow-md shadow-brand-500/20'
-                        : 'bg-navy-200 dark:bg-navy-800 text-navy-400'
+                        ? 'bg-[var(--accent-subtle)] text-[var(--accent)] border border-[var(--accent)]/20'
+                        : 'bg-[var(--active-bg)] text-[var(--text-muted)] border border-[var(--rule)]'
                     }`}
                   >
-                    <Icon className="w-6 h-6" />
+                    <Icon className="w-5 h-5" />
                   </div>
+
                   {isUnlocked ? (
-                    <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-200">
-                      <CheckCircle2 className="w-3.5 h-3.5" />
+                    <span className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-emerald-600 dark:text-emerald-400 bg-emerald-500/10 px-2 py-0.5 rounded-full border border-emerald-500/20">
+                      <CheckCircle2 className="w-3 h-3" />
                       <span>Unlocked</span>
                     </span>
                   ) : (
-                    <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-navy-400 bg-navy-100 dark:bg-navy-800 px-2.5 py-0.5 rounded-full">
+                    <span className="inline-flex items-center gap-1 text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] bg-[var(--active-bg)] px-2 py-0.5 rounded-full border border-[var(--rule)]">
                       <Lock className="w-3 h-3" />
                       <span>Locked</span>
                     </span>
@@ -174,16 +176,16 @@ export default function BadgesPage() {
                 </div>
 
                 <div>
-                  <h3 className="font-extrabold text-base text-navy-900 dark:text-white">
+                  <h3 className="font-editorial text-base text-[var(--text)] font-medium">
                     {b.title}
                   </h3>
-                  <p className="text-xs text-navy-500 dark:text-navy-400 mt-1 leading-relaxed">
+                  <p className="text-xs text-[var(--text-muted)] mt-1.5 leading-relaxed">
                     {b.description}
                   </p>
                 </div>
               </div>
 
-              <div className="pt-2 border-t border-navy-100 dark:border-navy-800 text-[10px] uppercase font-bold text-navy-400">
+              <div className="pt-3 border-t border-[var(--rule)] text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)]">
                 {b.category}
               </div>
             </div>

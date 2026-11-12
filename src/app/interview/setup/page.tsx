@@ -15,7 +15,6 @@ import {
   Layers,
   Award,
   ChevronRight,
-  Info,
 } from 'lucide-react';
 import { RoleType, ExperienceLevel, InterviewType, DifficultyLevel } from '@/types';
 
@@ -138,41 +137,41 @@ export default function InterviewSetupPage() {
   };
 
   return (
-    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-8 space-y-8">
+    <div className="max-w-4xl mx-auto px-4 sm:px-6 py-10 space-y-8">
       {/* Title */}
-      <div className="space-y-1.5">
-        <div className="inline-flex items-center gap-1.5 text-xs font-mono text-zinc-500">
+      <div className="space-y-1.5 pb-4 border-b border-[var(--rule)]">
+        <div className="inline-flex items-center gap-1.5 text-xs font-mono text-[var(--accent)]">
           <Sliders className="w-3.5 h-3.5" />
           <span>Session setup</span>
         </div>
-        <h1 className="text-2xl font-semibold text-zinc-900 dark:text-zinc-100 tracking-tight">
-          Configure interview session
+        <h1 className="font-editorial text-3xl sm:text-4xl text-[var(--text)] tracking-tight">
+          Configure Interview <em>Session</em>
         </h1>
-        <p className="text-xs text-zinc-500">
-          Select role, target difficulty level, and optionally upload a resume to ground questions in your project experience.
+        <p className="text-xs sm:text-sm text-[var(--text-muted)]">
+          Select target discipline, difficulty level, and optionally upload a resume to ground questions in your verified projects.
         </p>
       </div>
 
       {errorMsg && (
-        <div className="p-4 rounded-2xl bg-rose-50 dark:bg-rose-950/40 text-rose-700 dark:text-rose-300 border border-rose-200 dark:border-rose-800 text-sm">
+        <div className="p-4 rounded-xl bg-rose-500/10 text-rose-700 dark:text-rose-300 border border-rose-500/20 text-xs font-mono">
           {errorMsg}
         </div>
       )}
 
-      <form onSubmit={handleStartInterview} className="space-y-8">
+      <form onSubmit={handleStartInterview} className="space-y-6">
         {/* Main Settings Card */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-navy-850 border border-navy-100 dark:border-navy-750 shadow-xs space-y-6">
-          <h2 className="text-base font-bold text-navy-900 dark:text-white flex items-center gap-2">
-            <BrainCircuit className="w-5 h-5 text-brand-600" />
-            <span>Target Role & Discipline</span>
+        <div className="paper p-6 sm:p-7 rounded-2xl space-y-6">
+          <h2 className="font-editorial text-lg text-[var(--text)] font-medium flex items-center gap-2">
+            <BrainCircuit className="w-4 h-4 text-[var(--accent)]" />
+            <span>Target Role &amp; Discipline</span>
           </h2>
 
           {/* Job Role Selection */}
           <div className="space-y-2">
-            <label className="text-xs font-semibold text-navy-700 dark:text-navy-300 uppercase tracking-wider">
+            <label className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)]">
               Select Job Role
             </label>
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2">
               {jobRoles.map((role) => {
                 const selected = jobRole === role;
                 return (
@@ -180,10 +179,10 @@ export default function InterviewSetupPage() {
                     key={role}
                     type="button"
                     onClick={() => setJobRole(role)}
-                    className={`p-3 rounded-2xl text-xs font-medium text-left transition-all border ${
+                    className={`p-2.5 rounded-xl text-xs text-left transition-all border ${
                       selected
-                        ? 'bg-brand-50 dark:bg-brand-950/80 border-brand-500 text-brand-700 dark:text-brand-300 shadow-xs ring-2 ring-brand-500/20 font-semibold'
-                        : 'bg-white dark:bg-navy-800 border-navy-200 dark:border-navy-700 text-navy-700 dark:text-navy-300 hover:border-brand-300 dark:hover:border-navy-600'
+                        ? 'bg-[var(--accent)] text-white border-[var(--accent)] shadow-sm font-semibold'
+                        : 'bg-[var(--bg)] border-[var(--rule)] text-[var(--text)] hover:border-[var(--text-muted)]'
                     }`}
                   >
                     {role}
@@ -197,7 +196,7 @@ export default function InterviewSetupPage() {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 pt-2">
             {/* Experience Level */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-navy-700 dark:text-navy-300 uppercase tracking-wider">
+              <label className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)]">
                 Experience Level
               </label>
               <div className="grid grid-cols-3 gap-2">
@@ -208,10 +207,10 @@ export default function InterviewSetupPage() {
                       key={level}
                       type="button"
                       onClick={() => setExperienceLevel(level)}
-                      className={`p-2.5 rounded-xl text-xs font-medium text-center transition-all border ${
+                      className={`p-2 rounded-xl text-xs text-center transition-all border ${
                         selected
-                          ? 'bg-brand-600 text-white border-brand-600 shadow-xs font-semibold'
-                          : 'bg-white dark:bg-navy-800 border-navy-200 dark:border-navy-700 text-navy-700 dark:text-navy-300 hover:bg-navy-50'
+                          ? 'bg-[var(--accent)] text-white border-[var(--accent)] shadow-sm font-semibold'
+                          : 'bg-[var(--bg)] border-[var(--rule)] text-[var(--text)] hover:border-[var(--text-muted)]'
                       }`}
                     >
                       {level}
@@ -223,7 +222,7 @@ export default function InterviewSetupPage() {
 
             {/* Interview Type */}
             <div className="space-y-2">
-              <label className="text-xs font-semibold text-navy-700 dark:text-navy-300 uppercase tracking-wider">
+              <label className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)]">
                 Interview Type
               </label>
               <div className="grid grid-cols-3 gap-2">
@@ -234,10 +233,10 @@ export default function InterviewSetupPage() {
                       key={type}
                       type="button"
                       onClick={() => setInterviewType(type)}
-                      className={`p-2 rounded-xl text-xs font-medium text-center transition-all border ${
+                      className={`p-2 rounded-xl text-xs text-center transition-all border ${
                         selected
-                          ? 'bg-brand-600 text-white border-brand-600 shadow-xs font-semibold'
-                          : 'bg-white dark:bg-navy-800 border-navy-200 dark:border-navy-700 text-navy-700 dark:text-navy-300 hover:bg-navy-50'
+                          ? 'bg-[var(--accent)] text-white border-[var(--accent)] shadow-sm font-semibold'
+                          : 'bg-[var(--bg)] border-[var(--rule)] text-[var(--text)] hover:border-[var(--text-muted)]'
                       }`}
                     >
                       {type}
@@ -249,16 +248,16 @@ export default function InterviewSetupPage() {
           </div>
 
           {/* Difficulty & Number of Questions & Duration */}
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-2 border-t border-navy-100 dark:border-navy-800">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-4 border-t border-[var(--rule)]">
             {/* Difficulty */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-navy-700 dark:text-navy-300 uppercase tracking-wider">
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)]">
                 Difficulty
               </label>
               <select
                 value={difficulty}
                 onChange={(e) => setDifficulty(e.target.value as DifficultyLevel)}
-                className="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-navy-800 border border-navy-200 dark:border-navy-700 text-xs font-semibold text-navy-800 dark:text-navy-200 focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3 py-2 rounded-xl bg-[var(--bg)] border border-[var(--rule)] text-xs text-[var(--text)] font-medium focus:outline-none focus:border-[var(--accent)]"
               >
                 <option value="Easy">Easy (Fundamentals & Core syntax)</option>
                 <option value="Medium">Medium (Industry standard engineering)</option>
@@ -268,14 +267,14 @@ export default function InterviewSetupPage() {
             </div>
 
             {/* Questions count */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-navy-700 dark:text-navy-300 uppercase tracking-wider">
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)]">
                 Number of Questions
               </label>
               <select
                 value={questionCount}
                 onChange={(e) => setQuestionCount(Number(e.target.value))}
-                className="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-navy-800 border border-navy-200 dark:border-navy-700 text-xs font-semibold text-navy-800 dark:text-navy-200 focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3 py-2 rounded-xl bg-[var(--bg)] border border-[var(--rule)] text-xs text-[var(--text)] font-medium focus:outline-none focus:border-[var(--accent)]"
               >
                 <option value="3">3 Questions (Quick Blitz - ~10 min)</option>
                 <option value="5">5 Questions (Standard Mock - ~20 min)</option>
@@ -285,14 +284,14 @@ export default function InterviewSetupPage() {
             </div>
 
             {/* Duration */}
-            <div className="space-y-2">
-              <label className="text-xs font-semibold text-navy-700 dark:text-navy-300 uppercase tracking-wider">
+            <div className="space-y-1.5">
+              <label className="text-[11px] font-mono uppercase tracking-wider text-[var(--text-muted)]">
                 Target Duration
               </label>
               <select
                 value={durationMinutes}
                 onChange={(e) => setDurationMinutes(Number(e.target.value))}
-                className="w-full px-3 py-2.5 rounded-xl bg-white dark:bg-navy-800 border border-navy-200 dark:border-navy-700 text-xs font-semibold text-navy-800 dark:text-navy-200 focus:ring-2 focus:ring-brand-500"
+                className="w-full px-3 py-2 rounded-xl bg-[var(--bg)] border border-[var(--rule)] text-xs text-[var(--text)] font-medium focus:outline-none focus:border-[var(--accent)]"
               >
                 <option value="15">15 Minutes</option>
                 <option value="20">20 Minutes (Recommended)</option>
@@ -303,27 +302,27 @@ export default function InterviewSetupPage() {
           </div>
         </div>
 
-        {/* Resume Upload & Parsing Module (Premium Feature) */}
-        <div className="p-6 sm:p-8 rounded-3xl bg-white dark:bg-navy-850 border border-navy-100 dark:border-navy-750 shadow-xs space-y-4">
+        {/* Resume Upload & Parsing Module */}
+        <div className="paper p-6 sm:p-7 rounded-2xl space-y-4">
           <div className="flex items-center justify-between">
-            <h2 className="text-base font-bold text-navy-900 dark:text-white flex items-center gap-2">
-              <FileText className="w-5 h-5 text-violet-600" />
-              <span>Resume-Based Question Tailoring (Optional)</span>
+            <h2 className="font-editorial text-lg text-[var(--text)] font-medium flex items-center gap-2">
+              <FileText className="w-4 h-4 text-[var(--accent)]" />
+              <span>Resume-Based Question Grounding (Optional)</span>
             </h2>
-            <span className="text-[11px] font-semibold px-2.5 py-0.5 rounded-full bg-violet-100 dark:bg-violet-950 text-violet-700 dark:text-violet-300">
-              Personalized AI Mode
+            <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-[var(--accent-subtle)] text-[var(--accent)] border border-[var(--accent)]/20">
+              Personalized
             </span>
           </div>
-          <p className="text-xs text-navy-500 dark:text-navy-400">
-            Upload your resume or paste its text. The AI will parse your highlighted tech stack and frame personalized questions mirroring real hiring manager inquiries.
+          <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+            Upload your resume or paste its text. The AI will parse your highlighted tech stack and frame questions reflecting real hiring inquiries.
           </p>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* File Upload zone */}
-            <div className="border-2 border-dashed border-navy-200 dark:border-navy-700 rounded-2xl p-6 text-center hover:border-brand-500 dark:hover:border-brand-500 transition-colors flex flex-col items-center justify-center">
-              <UploadCloud className="w-8 h-8 text-navy-400 mb-2" />
+            <div className="border border-dashed border-[var(--rule)] hover:border-[var(--accent)] rounded-xl p-6 text-center transition-colors flex flex-col items-center justify-center bg-[var(--bg)]">
+              <UploadCloud className="w-7 h-7 text-[var(--text-muted)] mb-2" />
               <label className="cursor-pointer">
-                <span className="text-xs font-bold text-brand-600 dark:text-brand-400 hover:underline">
+                <span className="text-xs font-semibold text-[var(--accent)] hover:underline">
                   Click to upload resume (.txt, .md, .json)
                 </span>
                 <input
@@ -333,7 +332,7 @@ export default function InterviewSetupPage() {
                   onChange={handleResumeFileUpload}
                 />
               </label>
-              <p className="text-[11px] text-navy-400 mt-1">Text-based files processed instantly</p>
+              <p className="text-[10px] font-mono text-[var(--text-muted)] mt-1">Text-based files processed instantly</p>
             </div>
 
             {/* Paste Text Area */}
@@ -341,16 +340,16 @@ export default function InterviewSetupPage() {
               <textarea
                 value={resumeText}
                 onChange={(e) => setResumeText(e.target.value)}
-                placeholder="Or paste your resume text here (e.g. skills: React, Node.js, AWS, Redis, GraphQL...)"
+                placeholder="Or paste resume skills/projects (e.g. React, Node.js, AWS, Redis, Kafka, PostgreSQL...)"
                 rows={4}
-                className="w-full p-3 rounded-2xl bg-navy-50 dark:bg-navy-900/60 border border-navy-200 dark:border-navy-700 text-xs text-navy-900 dark:text-white placeholder:text-navy-400 focus:ring-2 focus:ring-brand-500"
+                className="w-full p-3 rounded-xl bg-[var(--bg)] border border-[var(--rule)] text-xs text-[var(--text)] placeholder:text-[var(--text-muted)] focus:outline-none focus:border-[var(--accent)]"
               />
               {resumeText && !parsedData && (
                 <button
                   type="button"
                   onClick={handlePasteResumeParse}
                   disabled={isParsingResume}
-                  className="text-xs font-semibold text-brand-600 dark:text-brand-400 hover:underline flex items-center gap-1"
+                  className="text-xs font-mono text-[var(--accent)] hover:underline flex items-center gap-1"
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>{isParsingResume ? 'Parsing skills...' : 'Analyze pasted resume'}</span>
@@ -361,11 +360,11 @@ export default function InterviewSetupPage() {
 
           {/* Parsed Resume Preview Badge Box */}
           {parsedData && (
-            <div className="p-4 rounded-2xl bg-brand-50/70 dark:bg-brand-950/40 border border-brand-200/60 dark:border-brand-800 space-y-2">
-              <div className="flex items-center gap-2 text-xs font-bold text-brand-900 dark:text-brand-200">
-                <Check className="w-4 h-4 text-emerald-600" />
-                <span>Resume parsed successfully!</span>
-                <span className="text-[11px] font-normal text-navy-500 dark:text-navy-400">
+            <div className="p-3.5 rounded-xl bg-[var(--accent-subtle)] border border-[var(--accent)]/20 space-y-2 text-xs">
+              <div className="flex items-center gap-2 font-medium text-[var(--text)]">
+                <Check className="w-3.5 h-3.5 text-emerald-600" />
+                <span>Resume parsed successfully</span>
+                <span className="text-[10px] font-mono text-[var(--text-muted)]">
                   ({parsedData.experienceYearsEstimate})
                 </span>
               </div>
@@ -373,26 +372,23 @@ export default function InterviewSetupPage() {
                 {parsedData.extractedSkills?.map((s: string) => (
                   <span
                     key={s}
-                    className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-white dark:bg-navy-800 text-navy-700 dark:text-navy-300 border border-navy-200 dark:border-navy-700"
+                    className="px-2 py-0.5 rounded-full text-[10px] font-mono bg-[var(--paper)] text-[var(--text)] border border-[var(--rule)]"
                   >
                     {s}
                   </span>
                 ))}
               </div>
-              <p className="text-[11px] text-brand-800 dark:text-brand-300 font-medium">
-                Questions will be tailored to your verified skill portfolio.
-              </p>
             </div>
           )}
         </div>
 
         {/* Submit & Start Button */}
-        <div className="paper p-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="text-xs text-[var(--text-soft)] space-y-0.5">
-            <p className="font-editorial text-sm font-semibold text-[var(--text)]">
-              {jobRole} • {difficulty} • {questionCount} Questions
+        <div className="paper p-5 sm:p-6 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="text-xs text-[var(--text-muted)] space-y-0.5">
+            <p className="font-editorial text-sm font-medium text-[var(--text)]">
+              {jobRole} · {difficulty} · {questionCount} Questions
             </p>
-            <p className="text-[11px] text-[var(--text-muted)]">Voice answer transcription & timer active in the session room.</p>
+            <p className="text-[11px]">Speech recognition transcription &amp; live timer ready in room.</p>
           </div>
 
           <button
@@ -408,7 +404,7 @@ export default function InterviewSetupPage() {
             ) : (
               <>
                 <Play className="w-3.5 h-3.5 fill-current" />
-                <span>Begin mock session</span>
+                <span>Begin Mock Session</span>
               </>
             )}
           </button>

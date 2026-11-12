@@ -258,7 +258,7 @@ export default function LandingPage() {
       <section id="sc-start" className="max-w-5xl mx-auto px-4 sm:px-6 pt-20 pb-16 text-center space-y-6">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-mono text-[var(--accent)] bg-[var(--accent-subtle)] border border-[var(--accent)]/20 mx-auto">
           <span className="w-2 h-2 rounded-full bg-[var(--accent)] animate-ping" />
-          <span>QM Enfold Edition · Technical &amp; HR Mock Simulator</span>
+          <span>InterviewIQ · Technical &amp; HR Mock Simulator</span>
         </div>
 
         <h1 className="font-editorial text-4xl sm:text-6xl md:text-7xl font-semibold tracking-tight text-[var(--text)] leading-[1.08] max-w-4xl mx-auto">
@@ -293,7 +293,7 @@ export default function LandingPage() {
             onClick={() => scrollToSection('sc-fold')}
             className="btn-enfold-ghost px-5 py-3 text-xs sm:text-sm"
           >
-            <span>Explore Folds</span>
+            <span>Explore Structure</span>
             <span className="text-[var(--accent)]">↓</span>
           </button>
         </div>
@@ -334,7 +334,7 @@ export default function LandingPage() {
               <div className="space-y-3 py-4 text-center animate-fadeIn">
                 <div className="inline-flex items-center gap-2 text-xs font-mono text-[var(--accent)] px-3 py-1 rounded-full bg-[var(--accent-subtle)]">
                   <CheckCircle2 className="w-3.5 h-3.5" />
-                  <span>Fold 01: Full Stack Architecture (Tucked Away)</span>
+                  <span>Section 01: Full Stack Architecture (Tucked Away)</span>
                 </div>
                 <h3 className="font-editorial text-xl text-[var(--text)] font-medium">
                   120 words neatly compressed.
@@ -387,7 +387,7 @@ export default function LandingPage() {
               <div className="flex items-center gap-3">
                 <span className={`cv ${openFolds.question ? 'open' : ''}`} />
                 <span className="font-editorial text-base sm:text-lg text-[var(--text)] font-medium">
-                  Fold 01 · Question: React Virtual DOM &amp; Fiber
+                  Section 01 · Question: React Virtual DOM &amp; Fiber
                 </span>
                 <span className="text-[10px] font-mono uppercase px-2 py-0.5 rounded-full bg-[var(--accent-subtle)] text-[var(--accent)]">
                   Hard
@@ -429,7 +429,7 @@ export default function LandingPage() {
               <div className="flex items-center gap-3">
                 <span className={`cv ${openFolds.answer ? 'open' : ''}`} />
                 <span className="font-editorial text-base sm:text-lg text-[var(--text)] font-medium">
-                  Fold 02 · Candidate Voice &amp; Transcript
+                  Section 02 · Candidate Voice &amp; Transcript
                 </span>
                 {isListening && (
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-rose-500/10 text-rose-600 animate-pulse">
@@ -498,14 +498,14 @@ export default function LandingPage() {
               <div className="flex items-center gap-3">
                 <span className={`cv ${openFolds.rubric ? 'open' : ''}`} />
                 <span className="font-editorial text-base sm:text-lg text-[var(--text)] font-medium">
-                  Fold 03 · 5-Parameter AI Academic Evaluation
+                  Section 03 · 5-Parameter AI Academic Evaluation
                 </span>
                 <span className="font-editorial text-sm font-semibold text-[var(--accent)]">
                   88.6% Total
                 </span>
               </div>
               <span className="text-xs font-mono text-[var(--text-muted)]">
-                {openFolds.rubric ? 'Close Fold' : 'Open Fold'}
+                {openFolds.rubric ? 'Close Section' : 'Open Section'}
               </span>
             </button>
 
@@ -575,14 +575,14 @@ export default function LandingPage() {
               <div className="flex items-center gap-3">
                 <span className={`cv ${openFolds.model ? 'open' : ''}`} />
                 <span className="font-editorial text-base sm:text-lg text-[var(--text)] font-medium">
-                  Fold 04 · Verified Model Answer
+                  Section 04 · Verified Model Answer
                 </span>
                 <span className="text-[10px] font-mono text-emerald-600 bg-emerald-500/10 px-2 py-0.5 rounded-full">
                   Exemplary
                 </span>
               </div>
               <span className="text-xs font-mono text-[var(--text-muted)]">
-                {openFolds.model ? 'Close Fold' : 'Open Fold'}
+                {openFolds.model ? 'Close Section' : 'Open Section'}
               </span>
             </button>
 
@@ -754,6 +754,85 @@ export default function LandingPage() {
             </div>
             <div className="paper p-2.5 rounded-xl">
               <kbd className="mr-1">Esc</kbd> Close Overlay
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ── 5b. Horizontal Domain Tracks (Sideways Carousel) ── */}
+      <section className="max-w-6xl mx-auto px-4 sm:px-6 py-16 border-t border-[var(--rule)] space-y-6">
+        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+          <div>
+            <span className="text-xs font-mono uppercase tracking-wider text-[var(--accent)]">
+              Multi-Discipline Support
+            </span>
+            <h2 className="font-editorial text-3xl sm:text-4xl text-[var(--text)] font-semibold mt-1">
+              One simple structure. <em>Endless technical disciplines.</em>
+            </h2>
+          </div>
+          <p className="text-xs text-[var(--text-muted)] font-mono">
+            Scroll horizontally to explore tracks →
+          </p>
+        </div>
+
+        <div className="flex gap-4 overflow-x-auto pb-4 pt-1 snap-x no-scrollbar">
+          <div className="min-w-[280px] sm:min-w-[320px] paper p-6 rounded-2xl snap-start space-y-3 hover:border-[var(--accent)]/40 transition-colors">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--accent)] bg-[var(--accent-subtle)] px-2 py-0.5 rounded-full border border-[var(--accent)]/20">
+              Track 01
+            </span>
+            <h3 className="font-editorial text-xl text-[var(--text)] font-medium">
+              Frontend &amp; Web Performance
+            </h3>
+            <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+              React 18 Fiber architecture, time-slicing with useTransition, SSR hydration mismatch, and Core Web Vitals (LCP, INP, CLS).
+            </p>
+            <div className="pt-2 text-[11px] font-mono text-[var(--accent)] flex items-center gap-1">
+              <span>Explore rubric breakdown</span> →
+            </div>
+          </div>
+
+          <div className="min-w-[280px] sm:min-w-[320px] paper p-6 rounded-2xl snap-start space-y-3 hover:border-[var(--accent)]/40 transition-colors">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--accent)] bg-[var(--accent-subtle)] px-2 py-0.5 rounded-full border border-[var(--accent)]/20">
+              Track 02
+            </span>
+            <h3 className="font-editorial text-xl text-[var(--text)] font-medium">
+              Distributed Systems
+            </h3>
+            <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+              Raft consensus, Kafka log partitioning, 2PC vs Saga transactions, CAP theorem tradeoffs, and idempotent API retries.
+            </p>
+            <div className="pt-2 text-[11px] font-mono text-[var(--accent)] flex items-center gap-1">
+              <span>Explore rubric breakdown</span> →
+            </div>
+          </div>
+
+          <div className="min-w-[280px] sm:min-w-[320px] paper p-6 rounded-2xl snap-start space-y-3 hover:border-[var(--accent)]/40 transition-colors">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--accent)] bg-[var(--accent-subtle)] px-2 py-0.5 rounded-full border border-[var(--accent)]/20">
+              Track 03
+            </span>
+            <h3 className="font-editorial text-xl text-[var(--text)] font-medium">
+              High-Scale Database &amp; Cache
+            </h3>
+            <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+              B-tree vs LSM-tree storage engines, Redis cluster cache invalidation patterns, read replication lag, and distributed locks.
+            </p>
+            <div className="pt-2 text-[11px] font-mono text-[var(--accent)] flex items-center gap-1">
+              <span>Explore rubric breakdown</span> →
+            </div>
+          </div>
+
+          <div className="min-w-[280px] sm:min-w-[320px] paper p-6 rounded-2xl snap-start space-y-3 hover:border-[var(--accent)]/40 transition-colors">
+            <span className="text-[10px] font-mono uppercase tracking-wider text-[var(--accent)] bg-[var(--accent-subtle)] px-2 py-0.5 rounded-full border border-[var(--accent)]/20">
+              Track 04
+            </span>
+            <h3 className="font-editorial text-xl text-[var(--text)] font-medium">
+              Behavioral &amp; Leadership
+            </h3>
+            <p className="text-xs text-[var(--text-muted)] leading-relaxed">
+              STAR framework situational storytelling, resolving high-friction technical disagreements, and leading post-mortem blameless RCAs.
+            </p>
+            <div className="pt-2 text-[11px] font-mono text-[var(--accent)] flex items-center gap-1">
+              <span>Explore rubric breakdown</span> →
             </div>
           </div>
         </div>

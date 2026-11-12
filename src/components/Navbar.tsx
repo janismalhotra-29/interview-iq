@@ -41,14 +41,11 @@ export default function Navbar() {
     <header className="sticky top-0 z-50 backdrop-blur-md bg-[var(--bg)]/90 border-b border-[var(--rule)] transition-colors">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
         <div className="flex items-center justify-between h-14">
-          {/* Logo & Brand (Enfold Editorial Style) */}
+          {/* Logo & Brand */}
           <div className="flex items-center gap-6">
             <Link href="/" className="flex items-center gap-2 group">
               <span className="font-editorial text-lg tracking-tight text-[var(--text)] font-semibold">
                 Interview<em className="text-[var(--accent)] not-italic font-normal italic ml-0.5">IQ</em>
-              </span>
-              <span className="text-[10px] font-mono text-[var(--text-muted)] border border-[var(--rule)] px-1.5 py-0.2 rounded-full">
-                enfold
               </span>
             </Link>
 

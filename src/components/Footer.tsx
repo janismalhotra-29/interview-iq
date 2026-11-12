@@ -62,7 +62,7 @@ export default function Footer() {
         <div className="pt-6 border-t border-[var(--rule)] flex flex-col sm:flex-row items-center justify-between gap-2 text-xs text-[var(--text-muted)]">
           <p>© 2026 InterviewIQ. Open only what you need.</p>
           <div className="flex items-center gap-4 text-[11px] font-mono">
-            <span>Enfold Aesthetic • Next.js 14</span>
+            <span>Tactile Paper Architecture • Next.js 14</span>
           </div>
         </div>
       </div>
