@@ -56,21 +56,56 @@
     font-weight: 500;
   }
 
-  /* Page Transition Animations */
+  /* Visibly Smooth Page Transition Animations */
   @keyframes pageEnter {
     0% {
       opacity: 0;
-      transform: translateY(6px);
+      transform: translateY(18px) scale(0.995);
+    }
+    60% {
+      opacity: 0.9;
     }
     100% {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
     }
   }
 
   .animate-page-enter {
-    animation: pageEnter 0.24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation: pageEnter 0.42s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     will-change: opacity, transform;
+  }
+
+  /* Top Navigation Loader Shimmer */
+  @keyframes topLoaderSweep {
+    0% {
+      width: 0%;
+      opacity: 1;
+    }
+    70% {
+      width: 85%;
+      opacity: 1;
+    }
+    100% {
+      width: 100%;
+      opacity: 0;
+    }
+  }
+
+  .top-loader-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent) 0%, #F59E0B 50%, var(--accent) 100%);
+    box-shadow: 0 0 14px var(--accent), 0 0 6px var(--accent);
+    z-index: 99999;
+    pointer-events: none;
+    border-radius: 0 3px 3px 0;
+  }
+
+  .top-loader-active {
+    animation: topLoaderSweep 0.55s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
   }
 
   /* Tactile Paper Cards */
@@ -79,6 +114,10 @@
     border: 1px solid var(--rule);
     box-shadow: var(--paper-shadow);
     border-radius: 14px;
+    transition: transform 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.22s cubic-bezier(0.2, 0.8, 0.2, 1), border-color 0.2s ease;
+  }
+  .paper:hover {
+    box-shadow: 0 6px 24px rgba(31, 29, 26, 0.08), 0 1px 3px rgba(31, 29, 26, 0.04);
   }
 
   /* Tactile Keycaps */

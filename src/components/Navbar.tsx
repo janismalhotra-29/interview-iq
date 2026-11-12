@@ -60,7 +60,7 @@ export default function Navbar() {
                       key={link.href}
                       href={link.href}
                       prefetch={true}
-                      className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-all ${
+                      className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-all duration-150 active:scale-95 ${
                         isActive
                           ? 'bg-[var(--text)] text-[var(--bg)] font-semibold shadow-xs'
                           : 'text-[var(--text-muted)] hover:text-[var(--text)] hover:bg-[var(--active-bg)]'
