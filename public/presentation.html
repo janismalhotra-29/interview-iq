@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InterviewIQ - 8 Slide Master Presentation</title>
+  <style>
+    :root {
+      --bg: #FDFBF7;
+      --paper: #FFFFFF;
+      --ink: #1C1917;
+      --muted: #78716C;
+      --border: #E7E5E4;
+      --accent: #C2570F;
+      --accent-soft: rgba(194, 87, 15, 0.08);
+      --font-serif: "Newsreader", "Charter", "Georgia", serif;
+      --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background-color: #0F172A;
+      font-family: var(--font-sans);
+      color: var(--ink);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Deck container (16:9 ratio) */
+    .deck-container {
+      position: relative;
+      width: 92vw;
+      max-width: 1240px;
+      aspect-ratio: 16 / 9;
+      background: var(--bg);
+      border-radius: 16px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255,255,255,0.12);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Slide */
+    .slide {
+      position: absolute;
+      inset: 0;
+      padding: 48px 64px 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      opacity: 0;
+      transform: translateX(35px) scale(0.985);
+      pointer-events: none;
+      transition: all 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+      background: var(--bg);
+    }
+
+    .slide.active {
+      opacity: 1;
+      transform: translateX(0) scale(1);
+      pointer-events: auto;
+      z-index: 10;
+    }
+
+    .slide.prev {
+      opacity: 0;
+      transform: translateX(-35px) scale(0.985);
+      pointer-events: none;
+    }
+
+    /* Header */
+    .slide-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background: var(--accent-soft);
+      border: 1px solid rgba(194, 87, 15, 0.25);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+      width: fit-content;
+    }
+
+    .slide-title {
+      font-family: var(--font-serif);
+      font-size: 34px;
+      line-height: 1.15;
+      font-weight: 700;
+      color: var(--ink);
+      letter-spacing: -0.02em;
+    }
+
+    .slide-subtitle {
+      font-size: 16px;
+      color: var(--muted);
+      margin-top: 6px;
+      font-weight: 400;
+    }
+
+    /* Grid & Cards */
+    .slide-body {
+      flex: 1;
+      display: flex;
+      gap: 24px;
+      margin-top: 20px;
+      margin-bottom: 10px;
+      align-items: stretch;
+    }
+
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 22px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+
+    .card h3 {
+      font-family: var(--font-serif);
+      font-size: 19px;
+      color: var(--ink);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card p, .card li {
+      font-size: 14px;
+      line-height: 1.55;
+      color: #44403C;
+    }
+
+    ul.feature-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    ul.feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    ul.feature-list li span.bullet {
+      color: var(--accent);
+      font-weight: bold;
+      font-size: 16px;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .pill-stat {
+      display: inline-block;
+      background: #FAFAF9;
+      border: 1px solid var(--border);
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 13px;
+    }
+
+    /* Rubric Table */
+    .rubric-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 6px;
+    }
+    .rubric-table th, .rubric-table td {
+      padding: 8px 12px;
+      text-align: left;
+      font-size: 13.5px;
+      border-bottom: 1px solid var(--border);
+    }
+    .rubric-table th {
+      background: #FAFAF9;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* Controls Bar */
+    .deck-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 24px;
+      background: var(--paper);
+      border-top: 1px solid var(--border);
+      z-index: 20;
+    }
+
+    .btn-nav {
+      background: var(--paper);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      padding: 7px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+    }
+
+    .btn-nav:hover {
+      background: #F5F5F4;
+      border-color: #D6D3D1;
+    }
+
+    .btn-nav:active {
+      transform: scale(0.96);
+    }
+
+    .btn-accent {
+      background: var(--accent);
+      color: white;
+      border-color: var(--accent);
+    }
+    .btn-accent:hover {
+      background: #A64708;
+    }
+
+    .slide-progress {
+      font-size: 13.5px;
+      font-weight: 600;
+      color: var(--muted);
+      letter-spacing: 0.05em;
+    }
+
+    /* Speaker Notes Bar */
+    .speaker-notes {
+      position: absolute;
+      bottom: 54px;
+      left: 24px;
+      right: 24px;
+      background: rgba(28, 25, 23, 0.95);
+      color: #FAFAF9;
+      padding: 14px 18px;
+      border-radius: 8px;
+      font-size: 13.5px;
+      line-height: 1.5;
+      display: none;
+      z-index: 50;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .speaker-notes.visible {
+      display: block;
+    }
+    .notes-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #FDBA74;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    @media print {
+      body { background: white; overflow: visible; }
+      .deck-container { width: 100%; aspect-ratio: unset; box-shadow: none; }
+      .slide { position: relative; opacity: 1; transform: none; page-break-after: always; height: 100vh; }
+      .deck-controls, .speaker-notes { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="deck-container" id="deckContainer">
+    
+    <!-- SLIDE 1 / 8: Title Slide -->
+    <div class="slide active" data-notes="Good morning respected teachers. Today I am presenting InterviewIQ, an AI-powered Technical and HR Mock Interview Simulator with a 5-parameter academic rubric designed to eliminate placement anxiety.">
+      <div>
+        <div class="slide-badge">Academic Project Presentation · 8-Slide Edition</div>
+        <h1 class="slide-title" style="font-size: 46px; margin-top: 6px;">InterviewIQ</h1>
+        <p class="slide-subtitle" style="font-size: 20px;">AI-Powered Technical & HR Mock Interview Simulator</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="card" style="background: linear-gradient(135deg, #FFFFFF 0%, #FFF8F3 100%); border-left: 4px solid var(--accent);">
+          <h3 style="color: var(--accent);">Project Mission & Identity</h3>
+          <p style="font-size: 15px; line-height: 1.6; margin-bottom: 12px;">
+            A modern, accessible simulator bridging the gap between student coding capability and high-pressure verbal interview articulation through real-time voice interaction, resume grounding, and multi-dimensional academic evaluation.
+          </p>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span class="pill-stat">🎙️ Native Web Speech STT/TTS</span>
+            <span class="pill-stat">⚖️ 5-Parameter Weighted Rubric</span>
+            <span class="pill-stat">📄 Resume Grounding</span>
+            <span class="pill-stat">📊 5-Axis Radar Analytics</span>
+          </div>
+        </div>
+
+        <div class="card" style="flex: 0.75; justify-content: center; background: #FAFAF9;">
+          <h3 style="font-size: 17px; margin-bottom: 10px;">Presentation Details</h3>
+          <p style="font-weight: 600; font-size: 16px; color: var(--ink);">B.Tech Project Evaluation</p>
+          <p style="color: var(--muted); font-size: 13.5px; margin-top: 2px;">Department of Computer Science & Engineering</p>
+          <hr style="border: 0; border-top: 1px solid var(--border); margin: 12px 0;">
+          <p style="font-size: 13px; color: var(--muted);"><strong>Tech:</strong> Next.js 14 · TypeScript · Tailwind · Web Speech API</p>
+        </div>
+      </div>
+
+      <div style="font-size: 12px; color: var(--muted); display: flex; justify-content: space-between;">
+        <span>Press <strong>→</strong> or <strong>Space</strong> to navigate</span>
+        <span>Slide 1 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 / 8: Problem Statement & Industry Reality -->
+    <div class="slide" data-notes="Explain the student placement crisis: Students practice DSA on LeetCode, but fail during verbal articulation. Human mock interviews cost ₹5,000/hr, and generic text chatbots lack voice immersion.">
+      <div>
+        <div class="slide-badge">The Placement Challenge</div>
+        <h2 class="slide-title">Problem Statement & Industry Gap</h2>
+        <p class="slide-subtitle">Why traditional preparation fails the majority of engineering students</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="card">
+          <h3 style="color: #DC2626;">1. The Verbal Articulation Gap</h3>
+          <p style="margin-bottom: 8px;">Students solve coding problems on LeetCode/HackerRank, but freeze in front of human interviewers when asked to explain architectural trade-offs or design decisions.</p>
+          <ul class="feature-list">
+            <li><span class="bullet">•</span> No verbal articulation practice</li>
+            <li><span class="bullet">•</span> High anxiety during rapid cross-questioning</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="color: #EA580C;">2. High Cost & Scalability Barrier</h3>
+          <p style="margin-bottom: 8px;">1-on-1 human mock interviews from industry experts cost ₹3,000 to ₹10,000 per hour, making continuous practice unaffordable for college students.</p>
+          <ul class="feature-list">
+            <li><span class="bullet">•</span> College placement cells have limited faculty time</li>
+            <li><span class="bullet">•</span> Cannot conduct repeated multi-round sessions</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="color: #4F46E5;">3. Flaws in Generic Chatbots</h3>
+          <p style="margin-bottom: 8px;">Standard ChatGPT text boxes lack realistic interview dynamics:</p>
+          <ul class="feature-list">
+            <li><span class="bullet">•</span> No spoken voice synthesis or timed speech capture</li>
+            <li><span class="bullet">•</span> Subjective scoring without structured rubrics</li>
+            <li><span class="bullet">•</span> No historical skill progression tracking</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="font-size: 12px; color: var(--muted); display: flex; justify-content: space-between;">
+        <span>InterviewIQ · Academic Presentation</span>
+        <span>Slide 2 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 / 8: Proposed Solution & System Architecture -->
+    <div class="slide" data-notes="Explain the end-to-end architecture: Next.js 14 App Router, Web Speech API for 0ms voice capture, Gemini AI evaluation engine, and client-side reactive analytics.">
+      <div>
+        <div class="slide-badge">Architecture & Workflow</div>
+        <h2 class="slide-title">Proposed Solution & System Architecture</h2>
+        <p class="slide-subtitle">A zero-cost, high-performance mock interview pipeline with zero external audio latency</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="card" style="flex: 1.2;">
+          <h3>End-to-End Execution Pipeline</h3>
+          <div style="background: #FAFAF9; border: 1px solid var(--border); border-radius: 8px; padding: 14px; font-family: monospace; font-size: 12.5px; line-height: 1.7;">
+            <div style="color: var(--accent); font-weight: bold;">[Step 1: Configuration & Context]</div>
+            Role (Frontend, Backend, ML, etc.) + Experience + Resume Text Parsing
+            <div style="color: #059669; font-weight: bold; margin-top: 6px;">[Step 2: Dual-Mode Voice Room]</div>
+            Web Speech TTS reads question ➔ Spacebar triggers native STT ➔ Real-time waveform
+            <div style="color: #2563EB; font-weight: bold; margin-top: 6px;">[Step 3: AI Rubric & Follow-Up Engine]</div>
+            Transcript scored on 5-Parameter Weighted Algorithm ➔ Dynamic cross-question if incomplete
+            <div style="color: #7C3AED; font-weight: bold; margin-top: 6px;">[Step 4: Longitudinal Intelligence]</div>
+            Recharts 5-Axis Competency Radar ➔ Dynamic Topic Roadmap ➔ Gamified Badges
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>Architectural Highlights</h3>
+          <ul class="feature-list">
+            <li><span class="bullet">⚡</span> <strong>0ms Audio Payload Latency:</strong> Local browser Web Speech API eliminates heavy audio streaming overhead.</li>
+            <li><span class="bullet">🔒</span> <strong>Privacy & Security:</strong> Voice converted to text locally on client machine before AI prompt dispatch.</li>
+            <li><span class="bullet">🚀</span> <strong>Serverless Scale:</strong> Next.js 14 App Router with static route generation (<100kB JS First Load).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="font-size: 12px; color: var(--muted); display: flex; justify-content: space-between;">
+        <span>InterviewIQ · Academic Presentation</span>
+        <span>Slide 3 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 / 8: Resume-Grounded Session Setup -->
+    <div class="slide" data-notes="Show how the interview is personalized: Students select role, difficulty, and upload their resume so questions test their actual projects and tech stack instead of generic trivia.">
+      <div>
+        <div class="slide-badge">Feature Deep Dive 1</div>
+        <h2 class="slide-title">Resume-Grounded Session Configuration</h2>
+        <p class="slide-subtitle">Personalizing interview rounds according to the candidate's actual projects</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="card">
+          <h3 style="color: var(--accent);">Multi-Discipline Role Engine</h3>
+          <p style="margin-bottom: 10px;">Covers the complete modern software industry spectrum:</p>
+          <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+            <span class="pill-stat">Full Stack</span>
+            <span class="pill-stat">Frontend</span>
+            <span class="pill-stat">Backend</span>
+            <span class="pill-stat">AI/ML</span>
+            <span class="pill-stat">System Design</span>
+            <span class="pill-stat">DevOps</span>
+            <span class="pill-stat">Data Analyst</span>
+            <span class="pill-stat">Product Manager</span>
+          </div>
+          <p style="margin-top: 12px; font-size: 13.5px; color: var(--muted);">Allows filtering by <strong>Beginner, Intermediate, Advanced</strong> and interview mode (Technical, HR, Behavioral, System Design).</p>
+        </div>
+
+        <div class="card">
+          <h3 style="color: #059669;">Resume Grounding Mechanism</h3>
+          <p style="margin-bottom: 10px;">Candidates paste or upload their resume. The system extracts:</p>
+          <ul class="feature-list">
+            <li><span class="bullet">✓</span> <strong>Verified Tech Stack:</strong> (e.g., PostgreSQL, Docker, Next.js, PyTorch)</li>
+            <li><span class="bullet">✓</span> <strong>Real Project Experience:</strong> Questions probe specific architectural decisions made in candidate's past work.</li>
+            <li><span class="bullet">✓</span> <strong>Anti-Hallucination:</strong> Guarantees the mock interviewer stays strictly aligned with company job descriptions.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="font-size: 12px; color: var(--muted); display: flex; justify-content: space-between;">
+        <span>InterviewIQ · Academic Presentation</span>
+        <span>Slide 4 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 / 8: Real-Time Voice Simulator -->
+    <div class="slide" data-notes="Explain the voice simulator: Browser speech synthesis speaks questions, Spacebar triggers speech-to-text with audio waveform visualizer, and tactile keyboard shortcuts simulate an exam.">
+      <div>
+        <div class="slide-badge">Feature Deep Dive 2</div>
+        <h2 class="slide-title">Real-Time Voice Simulator & Tactile UI</h2>
+        <p class="slide-subtitle">Replicating the visceral pressure of a real technical interview desk</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="card" style="border-top: 4px solid var(--accent);">
+          <h3>🎙️ Real-Time Dual-Mode Voice</h3>
+          <ul class="feature-list" style="margin-top: 8px;">
+            <li><span class="bullet">•</span> <strong>Browser TTS (`speechSynthesis`):</strong> Reads interview questions aloud with clear academic cadence.</li>
+            <li><span class="bullet">•</span> <strong>Browser STT (`SpeechRecognition`):</strong> Captures candidate verbal answers in real time without audio recording latency.</li>
+            <li><span class="bullet">•</span> <strong>Live Audio Waveform:</strong> Visual terracotta soundwave bars confirm audio capture.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="border-top: 4px solid #2563EB;">
+          <h3>⌨️ Tactile Mechanical Controls</h3>
+          <ul class="feature-list" style="margin-top: 8px;">
+            <li><span class="bullet">•</span> <strong>Spacebar Toggle:</strong> Instantly starts/stops voice transcription without mouse distraction.</li>
+            <li><span class="bullet">•</span> <strong>Distraction-Free Design:</strong> Calm editorial paper aesthetic prevents screen glare and cognitive fatigue.</li>
+            <li><span class="bullet">•</span> <strong>Micro-Animations:</strong> Smooth route transitions and tactile button depression feedback (`active:scale-95`).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="font-size: 12px; color: var(--muted); display: flex; justify-content: space-between;">
+        <span>InterviewIQ · Academic Presentation</span>
+        <span>Slide 5 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 / 8: 5-Parameter Rubric & Dynamic Follow-Ups -->
+    <div class="slide" data-notes="Crucial slide! Teachers love this mathematical rubric: Technical (30%), Relevance (25%), Clarity (20%), Completeness (15%), Problem Solving (10%), plus dynamic follow-ups on missing concepts.">
+      <div>
+        <div class="slide-badge">Feature Deep Dive 3 · Core Innovation</div>
+        <h2 class="slide-title">5-Parameter Weighted Rubric & Follow-Ups</h2>
+        <p class="slide-subtitle">Mathematical evaluation algorithm and real-time adaptive questioning</p>
+      </div>
+
+      <div class="slide-body" style="flex-direction: column;">
+        <table class="rubric-table">
+          <thead>
+            <tr>
+              <th>Rubric Parameter</th>
+              <th style="width: 14%;">Weight</th>
+              <th>Evaluation Criterion</th>
+              <th>Impact on Hiring</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>1. Technical Accuracy</strong></td>
+              <td><span class="pill-stat" style="color: var(--accent);">30%</span></td>
+              <td>Soundness of algorithms, APIs, architecture, and complexity calculations</td>
+              <td>Core Technical Competence</td>
+            </tr>
+            <tr>
+              <td><strong>2. Relevance & Focus</strong></td>
+              <td><span class="pill-stat" style="color: #059669;">25%</span></td>
+              <td>Direct adherence to the core question without deflecting or rambling</td>
+              <td>Crisp Communication</td>
+            </tr>
+            <tr>
+              <td><strong>3. Communication Clarity</strong></td>
+              <td><span class="pill-stat" style="color: #2563EB;">20%</span></td>
+              <td>Logical structuring, clear vocabulary, professional cadence</td>
+              <td>Executive Presence</td>
+            </tr>
+            <tr>
+              <td><strong>4. Completeness & Edge Cases</strong></td>
+              <td><span class="pill-stat" style="color: #7C3AED;">15%</span></td>
+              <td>Mentioning boundary conditions, fault tolerance, and performance trade-offs</td>
+              <td>Senior Engineering Mindset</td>
+            </tr>
+            <tr>
+              <td><strong>5. Problem Solving & Structure</strong></td>
+              <td><span class="pill-stat" style="color: #D97706;">10%</span></td>
+              <td>Methodical first-principles breakdown of ambiguous problems</td>
+              <td>Analytical Ability</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div style="display: flex; gap: 14px; margin-top: 10px;">
+          <div style="flex: 1; background: #FFF8F3; border: 1px solid rgba(194,87,15,0.25); border-radius: 8px; padding: 10px 14px; font-size: 13px;">
+            <strong>Dynamic Follow-Up Generator:</strong> If a student misses a key concept (e.g., forgets React 18 Fiber), AI triggers an adaptive cross-question.
+          </div>
+          <div style="flex: 1; background: #F0FDF4; border: 1px solid rgba(5,150,105,0.25); border-radius: 8px; padding: 10px 14px; font-size: 13px;">
+            <strong>Verified Benchmark Answers:</strong> Shows what a Senior Staff Engineer answer looks like for instant comparative learning.
+          </div>
+        </div>
+      </div>
+
+      <div style="font-size: 12px; color: var(--muted); display: flex; justify-content: space-between;">
+        <span>InterviewIQ · Academic Presentation</span>
+        <span>Slide 6 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 / 8: Analytics, Roadmap & Gamification -->
+    <div class="slide" data-notes="Demonstrate the Recharts 5-axis radar chart, the personalized revision roadmap that aggregates failed concepts, and the gamified badge trophy shelf.">
+      <div>
+        <div class="slide-badge">Feature Deep Dive 4</div>
+        <h2 class="slide-title">Analytics Radar, Roadmap & Gamification</h2>
+        <p class="slide-subtitle">Transforming raw scores into long-term skill progression</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="card">
+          <h3 style="color: #2563EB;">📊 5-Axis Competency Radar</h3>
+          <p style="margin-bottom: 8px;">Recharts-powered multi-axis polygon mapping strengths and weaknesses.</p>
+          <ul class="feature-list">
+            <li><span class="bullet">•</span> Highlights uneven skill profiles (e.g., 90% Accuracy but 45% Edge Cases)</li>
+            <li><span class="bullet">•</span> Historical progression curve over multiple sessions</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="color: #059669;">🧭 Personalized Roadmap</h3>
+          <p style="margin-bottom: 8px;">Dynamic curriculum compiled from failed interview concepts.</p>
+          <ul class="feature-list">
+            <li><span class="bullet">•</span> Categorized topic revision checklists</li>
+            <li><span class="bullet">•</span> Curated high-yield engineering documentation links</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3 style="color: var(--accent);">🏆 Achievement Badges</h3>
+          <p style="margin-bottom: 8px;">Habit-forming gamification shelf for student retention.</p>
+          <ul class="feature-list">
+            <li><span class="bullet">•</span> Distinctions: <em>First Step, Consistency Master, Technical Guru, Top Performer</em></li>
+            <li><span class="bullet">•</span> Unlocks dynamically as benchmark milestones are crossed</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="font-size: 12px; color: var(--muted); display: flex; justify-content: space-between;">
+        <span>InterviewIQ · Academic Presentation</span>
+        <span>Slide 7 of 8</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 / 8: Conclusion, Future Scope & Q&A -->
+    <div class="slide" data-notes="End with maximum confidence: Summarize the social impact on student placements, outline future vision like WebRTC video cues, and thank the evaluation committee.">
+      <div>
+        <div class="slide-badge">Conclusion & Future Outlook</div>
+        <h2 class="slide-title">Impact, Future Scope & Conclusion</h2>
+        <p class="slide-subtitle">Democratizing elite mock interview preparation for every college student</p>
+      </div>
+
+      <div class="slide-body">
+        <div class="card" style="border-left: 4px solid var(--accent);">
+          <h3 style="color: var(--accent);">Project Impact</h3>
+          <ul class="feature-list">
+            <li><span class="bullet">✓</span> <strong>Zero Financial Barrier:</strong> Free, unlimited 24/7 mock interviews replacing ₹5,000/hr human sessions.</li>
+            <li><span class="bullet">✓</span> <strong>Academic Rigor:</strong> Mathematical 5-parameter rubric eliminates subjective grader bias.</li>
+            <li><span class="bullet">✓</span> <strong>Proven Articulation Growth:</strong> Habit-building voice interaction prepares students for real FAANG panels.</li>
+          </ul>
+        </div>
+
+        <div class="card" style="border-left: 4px solid #2563EB;">
+          <h3 style="color: #2563EB;">Future Scope</h3>
+          <ul class="feature-list">
+            <li><span class="bullet">🔮</span> <strong>Computer Vision Analysis:</strong> WebRTC facial expression, eye contact, and confidence tracking.</li>
+            <li><span class="bullet">💻</span> <strong>Live Collaborative IDE:</strong> Simultaneous verbal reasoning and interactive code editor execution.</li>
+            <li><span class="bullet">🏢</span> <strong>TPO College Dashboard:</strong> Department-wide placement readiness analytics for training cells.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border); padding-top: 12px;">
+        <span style="font-family: var(--font-serif); font-size: 20px; font-weight: bold; color: var(--ink);">Thank You! We are glad to take questions.</span>
+        <span style="font-size: 12px; color: var(--muted);">Slide 8 of 8</span>
+      </div>
+    </div>
+
+    <!-- CONTROLS -->
+    <div class="deck-controls">
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button class="btn-nav" id="prevBtn" onclick="prevSlide()">← Previous</button>
+        <button class="btn-nav btn-accent" id="nextBtn" onclick="nextSlide()">Next →</button>
+        <button class="btn-nav" onclick="toggleNotes()" id="notesToggleBtn">🗣️ Speaker Notes (N)</button>
+      </div>
+
+      <div class="slide-progress" id="progressText">Slide 1 of 8</div>
+
+      <div style="display: flex; gap: 8px; align-items: center;">
+        <button class="btn-nav" onclick="toggleFullScreen()">⛶ Fullscreen (F)</button>
+        <button class="btn-nav" onclick="window.print()">🖨️ Print / Save PDF</button>
+      </div>
+    </div>
+
+    <!-- SPEAKER NOTES -->
+    <div class="speaker-notes" id="speakerNotes">
+      <div class="notes-title">SPEAKER NOTES / KYA BOLNA HAI:</div>
+      <div id="notesContent">Loading notes...</div>
+    </div>
+
+  </div>
+
+  <div style="margin-top: 12px; color: #94A3B8; font-size: 12px; text-align: center;">
+    Tip: Use <strong>Arrow Keys (← / →)</strong> or <strong>Spacebar</strong> · Press <strong>F</strong> for Fullscreen · Press <strong>N</strong> for Speaker Notes · Press <strong>Ctrl+P</strong> to Print/Save as PDF
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const progressText = document.getElementById('progressText');
+    const speakerNotes = document.getElementById('speakerNotes');
+    const notesContent = document.getElementById('notesContent');
+
+    function updateSlide() {
+      slides.forEach((s, idx) => {
+        s.classList.remove('active', 'prev');
+        if (idx === currentSlide) {
+          s.classList.add('active');
+        } else if (idx < currentSlide) {
+          s.classList.add('prev');
+        }
+      });
+      progressText.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+      const activeNotes = slides[currentSlide].getAttribute('data-notes');
+      notesContent.textContent = activeNotes || "No notes for this slide.";
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides - 1) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 0) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function toggleNotes() {
+      speakerNotes.classList.toggle('visible');
+    }
+
+    function toggleFullScreen() {
+      const elem = document.getElementById('deckContainer');
+      if (!document.fullscreenElement) {
+        elem.requestFullscreen().catch(err => {
+          alert(`Error entering fullscreen: ${err.message}`);
+        });
+      } else {
+        document.exitFullscreen();
+      }
+    }
+
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        e.preventDefault();
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        prevSlide();
+      } else if (e.key === 'n' || e.key === 'N') {
+        toggleNotes();
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFullScreen();
+      }
+    });
+
+    updateSlide();
+  </script>
+</body>
+</html>

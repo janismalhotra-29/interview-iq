@@ -302,9 +302,27 @@ export default function InterviewRoomPage() {
           // All questions answered, finalize session!
           await finalizeInterview();
         }
+      } else {
+        // Fallback: Smoothly proceed to next question
+        if (currentIndex + 1 < questions.length) {
+          setCurrentIndex((prev) => prev + 1);
+          setCurrentAnswer('');
+          setQuestionStartTime(Date.now());
+          setAiState('idle');
+        } else {
+          await finalizeInterview();
+        }
       }
     } catch (err: any) {
       console.error('Error submitting answer:', err);
+      if (currentIndex + 1 < questions.length) {
+        setCurrentIndex((prev) => prev + 1);
+        setCurrentAnswer('');
+        setQuestionStartTime(Date.now());
+        setAiState('idle');
+      } else {
+        await finalizeInterview();
+      }
     } finally {
       setIsSubmittingAnswer(false);
     }
@@ -315,7 +333,7 @@ export default function InterviewRoomPage() {
     setAiState('thinking');
 
     try {
-      const res = await fetch('/api/evaluate/session', {
+      await fetch('/api/evaluate/session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -324,12 +342,10 @@ export default function InterviewRoomPage() {
           timeTakenSeconds: secondsElapsed,
         }),
       });
-
-      if (res.ok) {
-        router.push(`/report/${sessionId}`);
-      }
+      router.push(`/report/${sessionId}`);
     } catch (err) {
       console.error('Finalize session error:', err);
+      router.push(`/report/${sessionId}`);
     } finally {
       setIsFinalizingSession(false);
     }

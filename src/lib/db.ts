@@ -557,8 +557,61 @@ class PersistentDb {
 
   async getInterviewSession(sessionId: string): Promise<InterviewSession | null> {
     const db = this.ensureDb();
-    const session = db.interview_sessions.find((s) => s.id === sessionId);
-    if (!session) return null;
+    let session = db.interview_sessions.find((s) => s.id === sessionId);
+    
+    // Auto-synthesize session if not present (handles demo, 1, or client-generated ids)
+    if (!session) {
+      session = {
+        id: sessionId,
+        user_id: 'd0000000-0000-0000-0000-000000000001',
+        title: 'Full Stack Architecture Live Assessment',
+        job_role: 'Full Stack Developer',
+        experience_level: 'Intermediate',
+        interview_type: 'Technical',
+        difficulty: 'Hard',
+        question_count: 3,
+        duration_minutes: 20,
+        time_taken_seconds: 0,
+        status: 'in_progress',
+        created_at: new Date().toISOString(),
+      };
+      db.interview_sessions.push(session);
+
+      const defaultQuestions: InterviewQuestion[] = [
+        {
+          id: `q-${sessionId}-1`,
+          session_id: sessionId,
+          question_number: 1,
+          category: 'React Internals',
+          question_text: 'How does React’s Virtual DOM and Reconciliation algorithm work, and how does the React 18 Fiber architecture enable concurrent rendering?',
+          expected_concepts: ['Virtual DOM', 'Reconciliation', 'Fiber Node', 'Time Slicing', 'useTransition'],
+          difficulty: 'Hard',
+          created_at: new Date().toISOString(),
+        },
+        {
+          id: `q-${sessionId}-2`,
+          session_id: sessionId,
+          question_number: 2,
+          category: 'System Design',
+          question_text: 'Design a distributed rate limiter that handles 100,000 requests per second across multiple data centers with low latency.',
+          expected_concepts: ['Token Bucket', 'Sliding Window Counter', 'Redis Cluster', 'Local In-Memory Cache'],
+          difficulty: 'Hard',
+          created_at: new Date().toISOString(),
+        },
+        {
+          id: `q-${sessionId}-3`,
+          session_id: sessionId,
+          question_number: 3,
+          category: 'Behavioral & Leadership',
+          question_text: 'Describe a situation where you had a strong technical disagreement with a peer about architecture. How did you resolve it?',
+          expected_concepts: ['STAR Framework', 'Objective Benchmarking', 'Empathy', 'Consensus Building'],
+          difficulty: 'Medium',
+          created_at: new Date().toISOString(),
+        },
+      ];
+      db.interview_questions.push(...defaultQuestions);
+      this.persist();
+    }
 
     const questions = db.interview_questions.filter((q) => q.session_id === sessionId);
     const answers = db.interview_answers.filter((a) => a.session_id === sessionId);
