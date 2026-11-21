@@ -111,8 +111,11 @@ Output ONLY raw JSON, with no markdown code blocks.`;
     matches = [...matches, ...others];
   }
 
+  // Randomize & shuffle matching questions so taking the test again gives fresh, different questions!
+  const shuffled = [...matches].sort(() => Math.random() - 0.5);
+
   // If candidate provided resume context, adapt the first question to mention their resume tech
-  const results = matches.slice(0, input.questionCount).map((q, idx) => {
+  const results = shuffled.slice(0, input.questionCount).map((q, idx) => {
     let questionText = q.question;
     let category = q.category;
     let expectedConcepts = [...q.expectedConcepts];
