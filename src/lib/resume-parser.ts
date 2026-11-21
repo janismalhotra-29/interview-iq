@@ -10,14 +10,14 @@ export interface ParsedResume {
 }
 
 const COMMON_SKILLS = [
-  'JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue', 'Angular',
-  'Node.js', 'Express', 'Python', 'Django', 'FastAPI', 'Java', 'Spring Boot',
-  'C++', 'C#', '.NET', 'Go', 'Rust', 'Ruby', 'PHP',
-  'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Cassandra', 'Elasticsearch',
+  'JavaScript', 'TypeScript', 'React', 'Next.js', 'Vue', 'Angular', 'HTML', 'CSS', 'Tailwind',
+  'Node.js', 'Express', 'Python', 'Django', 'FastAPI', 'Flask', 'Java', 'Spring Boot',
+  'C++', 'C#', '.NET', 'Go', 'Golang', 'Rust', 'Ruby', 'PHP',
+  'PostgreSQL', 'MySQL', 'MongoDB', 'Redis', 'Cassandra', 'Elasticsearch', 'SQL',
   'AWS', 'Azure', 'GCP', 'Docker', 'Kubernetes', 'Terraform', 'CI/CD',
-  'GraphQL', 'REST API', 'gRPC', 'Microservices', 'System Design',
-  'PyTorch', 'TensorFlow', 'Scikit-Learn', 'Pandas', 'Transformers', 'LangChain',
-  'Git', 'Linux', 'Agile', 'Jira'
+  'GraphQL', 'REST API', 'gRPC', 'Microservices', 'System Design', 'WebSockets',
+  'PyTorch', 'TensorFlow', 'Scikit-Learn', 'Pandas', 'NumPy', 'Transformers', 'LangChain',
+  'Git', 'Linux', 'Agile', 'Jira', 'Data Structures', 'Algorithms'
 ];
 
 export function parseResumeContent(text: string): ParsedResume {

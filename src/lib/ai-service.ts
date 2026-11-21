@@ -118,8 +118,8 @@ Output ONLY raw JSON, with no markdown code blocks.`;
     let expectedConcepts = [...q.expectedConcepts];
 
     if (input.resumeContext && idx === 0) {
-      // Extract top technology from resume if possible
-      const matchTech = input.resumeContext.match(/(React|Node\.js|Python|TypeScript|PostgreSQL|AWS|Docker|Kubernetes|PyTorch|GraphQL)/i);
+      // Extract top technology from resume context
+      const matchTech = input.resumeContext.match(/(React|Next\.js|Node\.js|Python|TypeScript|PostgreSQL|AWS|Docker|Kubernetes|PyTorch|GraphQL|Java|C\+\+|SQL|MongoDB|Redis|Django|FastAPI|Go|Rust|Microservices|System Design|Express|Spring Boot)/i);
       if (matchTech) {
         questionText = `Based on your resume experience with ${matchTech[0]}, can you walk us through how you designed or optimized a mission-critical component in one of your recent projects?`;
         category = `Resume Deep Dive: ${matchTech[0]}`;
